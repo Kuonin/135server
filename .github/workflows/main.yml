@@ -22,6 +22,6 @@ jobs:
 
 
           script: |
-            cd /var/www/katiel.site/public_html
-            git clone git@github.com:Kuonin/135server.git
+            cd /var/www/katiel.site/public_html/135server
+            git pull
             echo 'Deployment successful to digital ocena'
