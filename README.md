@@ -12,6 +12,7 @@ Githubg auto deploy setup:
 Username/Password for logging onto site: on gradescope
 
 Changes to HTML file in DevTools after compression:
+- When an HTMl file is compressed, it is compressed on the server side, then sent over to the browser and then decompressed on the browsers side, for my html file, a total of 1.0 kB was transferred while I have a total of 17.3 kB resources
 - Followed this article, https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-mod_deflate-on-ubuntu-14-04, and mod_deflate is enabled by default so I made sure to verify what it was compression by checking the/etc/apache2/mods-enabled/deflate.conf file and it does that appear that html, css and js pages are being compressed
 - Here is what was in the file: *
 *         AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript
