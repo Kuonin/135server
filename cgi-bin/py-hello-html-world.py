@@ -4,7 +4,7 @@ import os
 from datetime import datetime
 
 print("Cache-Control: no-cache\n")
-print("Content-type: text/html\n\n")
+print("Content-Type: text/html\r\n\r\n")
 print("<html>")
 print("<head>")
 print("<title>Hello, Perl!</title>")
