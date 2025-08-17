@@ -23,5 +23,7 @@ jobs:
 
           script: |
             cd /var/www/katiel.site/public_html/135server
+            rm -r cgi-bin/*
             git pull
+            sudo chmod -R a+x cgi-bin
             echo 'Deployment successful to digital ocena'
