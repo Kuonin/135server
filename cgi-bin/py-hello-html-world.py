@@ -7,7 +7,7 @@ print("Cache-Control: no-cache")
 print("Content-Type: text/html\r\n\r\n")
 print("<html>")
 print("<head>")
-print("<title>Hello, Perl!</title>")
+print("<title>Hello, Python!</title>")
 print("</head>")
 print("<body>")
 
