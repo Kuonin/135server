@@ -3,7 +3,7 @@ use CGI::Session;
 use CGI;
 
 print "Content-type: text/html\n\n";
-
+ 
 my $cgi = new CGI;
 
 my $session;
