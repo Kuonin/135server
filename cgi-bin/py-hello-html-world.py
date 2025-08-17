@@ -1,5 +1,9 @@
 #!/usr/bin/python3
 
+import cgi
+import cgitb
+cgitb.enable()
+
 import os
 from datetime import datetime
 
@@ -11,8 +15,8 @@ print("<title>Hello, Perl!</title>")
 print("</head>")
 print("<body>")
 
-print("<h1>Katie was here - Hello, Perl!</h1>")
-print("<p>This page was generated with the Perl programming langauge</p>")
+print("<h1>Katie was here - Hello, Python!</h1>")
+print("<p>This page was generated with the Python programming langauge</p>")
 
 date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 print(f"<p>Current Time: {date}</p>")
