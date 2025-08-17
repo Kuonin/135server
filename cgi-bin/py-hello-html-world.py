@@ -1,7 +1,4 @@
 #!/usr/bin/python3
-import cgitb
-
-cgitb.enable()
 
 import os
 from datetime import datetime
