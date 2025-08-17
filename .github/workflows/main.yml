@@ -23,8 +23,5 @@ jobs:
 
           script: |
             cd /var/www/katiel.site/public_html/135server
-            rm -r cgi-bin/*
             git pull
-            gcc cgi-bin/c-hello-html-world.c -o cgi-bin/c-hello-html-world.cgi
-            chmod -R a+x cgi-bin
             echo 'Deployment successful to digital ocena'
