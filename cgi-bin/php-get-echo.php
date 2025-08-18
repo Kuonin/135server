@@ -2,10 +2,10 @@
 
 // print HTML file top
 
-echo <!DOCTYPE html>
+echo '<!DOCTYPE html>
 <html><head><title>GET Request Echo</title>
 </head><body><h1 align="center">Get Request Echo</h1>
-<hr>;
+<hr>';
 
 // The Query String is simply an environment variable
 echo "<b>Query String:</b> " . $_SERVER['QUERY_STRING'] . "<br />\n";
