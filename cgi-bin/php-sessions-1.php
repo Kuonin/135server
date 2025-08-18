@@ -6,10 +6,8 @@ header("Cache-Control: no-cache");
 //$username = fgets(STDIN);
 
 // Check to see if a proper name was sent
-$name = "";
-if ($username[0] == 'u') {
-    $name = substr($username, 9);
-}
+echo "$username";
+$name = $username;
 
 // Set the cookie using a header, add extra \n to end headers
 if (strlen($name) > 0) {
@@ -23,7 +21,7 @@ if (strlen($name) > 0) {
 echo "<html>";
 echo "<head><title>PHP Sessions</title></head>\n";
 echo "<body>";
-echo "<h1>C Sessions Page 1</h1>";
+echo "<h1>PHP Sessions Page 1</h1>";
 echo "<table>";
 
 // First check for new Cookie, then Check for old Cookie
