@@ -13,9 +13,9 @@ def main(argc, argv, envp):
     print("<h1>Python Session Destroyed</h1>")
 
     # Links
-    print("<a href=\"./cgi-bin/py-sessions-1.py\">Back to Page 1</a>")
+    print("<a href=\"cgi-bin/py-sessions-1.py\">Back to Page 1</a>")
     print("<br />")
-    print("<a href=\"./cgi-bin/py-sessions-2.py\">Back to Page 2</a>")
+    print("<a href=\"cgi-bin/py-sessions-2.py\">Back to Page 2</a>")
     print("<br />")
     print("<a href=\"/py-cgiform.html\">Python CGI Form</a>")
 
