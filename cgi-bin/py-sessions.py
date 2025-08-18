@@ -15,4 +15,4 @@ cookie["session"]["expires"] = \
 print("Cache-Control: no-cache")
 print("Content-Type: text/plain\r\n\r\n")
 
-print("Cookie set with: " + cookie.output)
+print("Cookie set with: ", cookie.output)
