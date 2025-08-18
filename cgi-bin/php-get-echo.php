@@ -24,12 +24,8 @@ if (strlen($_SERVER['QUERY_STRING']) > 0) {
 }
 
 // Print out the Query String
-$loopCounter = 0;
 foreach (array_keys($inputArray) as $key) {
-  $loopCounter += 1;
-  if ($loopCounter % 2 != 0) {
     echo "$key = " . $inputArray[$key] . "<br/>\n";
-  }
 }
 
 // Print the HTML file bottom
