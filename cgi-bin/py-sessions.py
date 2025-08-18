@@ -1,3 +1,6 @@
+#!/usr/bin/python3
+print("Cache-Control: no-cache")
+print("Content-Type: text/html\r\n\r\n")
 from http.server import HTTPServer, BaseHTTPRequestHandler 
 from urllib.parse import parse_qs, urlparse 
 import uuid 
