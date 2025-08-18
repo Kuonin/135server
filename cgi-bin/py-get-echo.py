@@ -14,7 +14,7 @@ import os
 import urllib.parse
 
 # The Query String is simply an environment variable
-print(f"<b>Query String:</b> {os.environ.get('QUERY_STRING', '')}<br />\n")
+print(f"<b>Raw Query String:</b> {os.environ.get('QUERY_STRING', '')}<br />\n")
 
 # Credit for this code to parse the Query string:
 # https://www.mediacollege.com/internet/perl/query-string.html
@@ -29,6 +29,7 @@ if len(query_string) > 0:
         in_dict[name] = value
 
 # Print out the Query String
+print("<b>Parsed Query: </b>")
 for key in in_dict:
     print(f"{key} = {in_dict[key]}<br/>\n")
 
