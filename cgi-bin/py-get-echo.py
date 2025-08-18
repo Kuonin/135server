@@ -1,0 +1,39 @@
+#!/usr/bin/python3
+print("Cache-Control: no-cache")
+print("Content-Type: text/html\r\n\r\n")
+
+# print HTML file top
+print("""
+<!DOCTYPE html>
+<html><head><title>GET Request Echo</title>
+</head><body><h1 align="center">Get Request Echo</h1>
+<hr>
+""")
+
+import os
+import urllib.parse
+
+# The Query String is simply an environment variable
+print(f"<b>Query String:</b> {os.environ.get('QUERY_STRING', '')}<br />\n")
+
+# Credit for this code to parse the Query string:
+# https://www.mediacollege.com/internet/perl/query-string.html
+query_string = os.environ.get('QUERY_STRING', '')
+in_dict = {}
+
+if len(query_string) > 0:
+    pairs = query_string.split('&')
+    for pair in pairs:
+        name, value = pair.split('=')
+        value = urllib.parse.unquote(value)
+        in_dict[name] = value
+
+# Print out the Query String
+loop = 0
+for key in in_dict:
+    loop += 1
+    if loop % 2 != 0:
+        print(f"{key} = {in_dict[key]}<br/>\n")
+
+# Print the HTML file bottom
+print("</body></html>")
