@@ -30,8 +30,10 @@ if len(query_string) > 0:
 
 # Print out the Query String
 print("<b>Parsed Query: </b>")
+print("<ul>")
 for key in in_dict:
-    print(f"{key} = {in_dict[key]}<br/>\n")
+    print(f"<li>{key} = {in_dict[key]}</li>\n")
+print("</ul>")
 
 # Print the HTML file bottom
 print("</body></html>")
