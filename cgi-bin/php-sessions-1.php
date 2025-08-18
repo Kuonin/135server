@@ -39,7 +39,7 @@ echo "</table>";
 echo "<br />";
 echo "<a href=\"/cgi-bin/php-sessions-2.php\">Session Page 2</a>";
 echo "<br />";
-echo "<a href=\"/c-cgiform.html\">PHP CGI Form</a>";
+echo "<a href=\"/php-cgiform.html\">PHP CGI Form</a>";
 echo "<br /><br />";
 
 // Destroy Cookie button
