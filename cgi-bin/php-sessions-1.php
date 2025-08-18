@@ -3,7 +3,7 @@
 header("Cache-Control: no-cache");
 
 // Get Name from Environment
-$username = fgets(STDIN);
+//$username = fgets(STDIN);
 
 // Check to see if a proper name was sent
 $name = "";
