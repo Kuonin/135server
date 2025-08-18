@@ -6,7 +6,7 @@ import random
 
 expiration = datetime.datetime.now() + datetime.timedelta(days=30)
 cookie = http.cookies.SimpleCookie()
-cookie["session"] = random.randint(10000)
+cookie["session"] = random.randint(1, 10000)
 cookie["session"]["domain"] = ".katiel.site"
 cookie["session"]["path"] = "/"
 cookie["session"]["expires"] = \
