@@ -1,36 +1,51 @@
 <?php
-// Create a new PHP Session
-session_start();
+// Headers
+header("Cache-Control: no-cache");
 
-// Create CGI Object
-$cgi = new CGI();
+// Get Name from Environment
+$username = fgets(STDIN);
 
-// Create a new Cookie from the Session ID
-$cookie = $cgi->cookie('CGISESSID', session_id());
-header('Content-Type: text/html; charset=UTF-8');
-header('Set-Cookie: ' . $cookie);
-
-// Store Data in that PHP Session
-$username = isset($_SESSION['username']) ? $_SESSION['username'] : (isset($_GET['username']) ? $_GET['username'] : null);
-$_SESSION['username'] = $username;
-
-echo "<html>";
-echo "<head>";
-echo "<title>PHP Sessions</title>";
-echo "</head>";
-echo "<body>";
-
-echo "<h1>PHP Sessions Page 1</h1>";
-
-if ($username) {
-    echo "<p><b>Name:</b> " . htmlspecialchars($username) . "</p>";
-} else {
-    echo "<p><b>Name:</b> You do not have a name set</p>";
+// Check to see if a proper name was sent
+$name = "";
+if ($username[0] == 'u') {
+    $name = substr($username, 9);
 }
-echo "<br/><br/>";
-echo "<a href=\"/cgi-bin/php-sessions-2.php\">Session Page 2</a><br/>";
-echo "<a href=\"/php-cgiform.html\">PHP CGI Form</a><br />";
-echo "<form style=\"margin-top:30px\" action=\"/cgi-bin/php-destroy-session.php\" method=\"get\">";
+
+// Set the cookie using a header, add extra \n to end headers
+if (strlen($name) > 0) {
+    header("Content-type: text/html");
+    setcookie("session_name", $name);
+} else {
+    header("Content-type: text/html");
+}
+
+// Body - HTML
+echo "<html>";
+echo "<head><title>PHP Sessions</title></head>\n";
+echo "<body>";
+echo "<h1>C Sessions Page 1</h1>";
+echo "<table>";
+
+// First check for new Cookie, then Check for old Cookie
+if (strlen($name) > 0) {
+    echo "<tr><td>Cookie:</td><td>$name</td></tr>\n";
+} else if (isset($_COOKIE['session_name']) && $_COOKIE['session_name'] != "destroyed") {
+    echo "<tr><td>Cookie:</td><td>" . htmlspecialchars($_COOKIE['session_name']) . "</td></tr>\n";
+} else {
+    echo "<tr><td>Cookie:</td><td>None</td></tr>\n";
+}
+
+echo "</table>";
+
+// Links for other pages
+echo "<br />";
+echo "<a href=\"/cgi-bin/php-sessions-2.php\">Session Page 2</a>";
+echo "<br />";
+echo "<a href=\"/c-cgiform.html\">PHP CGI Form</a>";
+echo "<br /><br />";
+
+// Destroy Cookie button
+echo "<form action=\"/cgi-bin/php-destroy-session.php\" method=\"get\">";
 echo "<button type=\"submit\">Destroy Session</button>";
 echo "</form>";
 
