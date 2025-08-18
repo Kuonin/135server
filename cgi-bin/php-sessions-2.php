@@ -2,11 +2,8 @@
 // Access PHP Session
 session_start();
 
-// Create a new PHP Object
-$cgi = new CGI();
-
 // Get the Session ID from the Cookie
-$sid = isset($_COOKIE['CGISESSID']) ? $_COOKIE['CGISESSID'] : null;
+$sid = isset($_COOKIE['session_name']) ? $_COOKIE['session_)name'] : null;
 $session = new SessionHandler();
 
 // Access Stored Data
