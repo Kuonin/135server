@@ -23,9 +23,9 @@ def main():
 
     # Body - HTML
     print("<html>")
-    print("<head><title>C Sessions</title></head>")
+    print("<head><title>Python Sessions</title></head>")
     print("<body>")
-    print("<h1>C Sessions Page 1</h1>")
+    print("<h1>Python Sessions Page 1</h1>")
     print("<table>")
 
     # First check for new Cookie, then Check for old Cookie
@@ -40,13 +40,13 @@ def main():
 
     # Links for other pages
     print("<br />")
-    print("<a href=\"/cgi-bin/c-sessions-2.cgi\">Session Page 2</a>")
+    print("<a href=\"./cgi-bin/py-sessions-2.py\">Session Page 2</a>")
     print("<br />")
-    print("<a href=\"/c-cgiform.html\">C CGI Form</a>")
+    print("<a href=\"./py-cgiform.html\">Python CGI Form</a>")
     print("<br /><br />")
 
     # Destroy Cookie button
-    print("<form action=\"/cgi-bin/c-destroy-session.cgi\" method=\"get\">")
+    print("<form action=\"./cgi-bin/py-destroy-session.py\" method=\"get\">")
     print("<button type=\"submit\">Destroy Session</button>")
     print("</form>")
 

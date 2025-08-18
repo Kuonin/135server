@@ -1,49 +1,57 @@
 #!/usr/bin/python3
-print("Cache-Control: no-cache")
-print("Content-Type: text/html\r\n\r\n")
 
-from http.cookies import SimpleCookie
-from flask import Flask, request, make_response, render_template_string
+import os
 
-app = Flask(__name__)
+def main():
+    # Headers
+    print("Cache-Control: no-cache")
 
-@app.route('/py-sessions-1.py', methods=['GET', 'POST'])
-def perl_sessions_1():
-    # Create a new session
-    session_id = request.cookies.get('CGISESSID')
-    if not session_id:
-        session_id = 'new_session_id'  # Placeholder for session ID generation
-        response = make_response(render_template_string(html_template(session_id, None)))
-        response.set_cookie('CGISESSID', session_id)
-        return response
+    # Get Name from Environment
+    username = input()
 
-    name = request.args.get('username') or request.cookies.get('username')
-    if name:
-        response = make_response(render_template_string(html_template(session_id, name)))
+    # Check to see if a proper name was sent
+    name = ""
+    if username[0] == 'u':
+        name = username[9:]
+
+    # Set the cookie using a header, add extra \n to end headers
+    if len(name) > 0:
+        print("Content-type: text/html")
+        print(f"Set-Cookie: {name}\n")
     else:
-        response = make_response(render_template_string(html_template(session_id, None)))
+        print("Content-type: text/html\n")
 
-    response.set_cookie('username', name)
-    return response
+    # Body - HTML
+    print("<html>")
+    print("<head><title>Python Sessions</title></head>")
+    print("<body>")
+    print("<h1>Python Sessions Page 1</h1>")
+    print("<table>")
 
-def html_template(session_id, name):
-    return f"""
-    <html>
-    <head>
-        <title>Python Sessions</title>
-    </head>
-    <body>
-        <h1>Python Sessions Page 1</h1>
-        <p><b>Name:</b> {name if name else 'You do not have a name set'}</p>
-        <br/><br/>
-        <a href="/cgi-bin/py-sessions-2.py">Session Page 2</a><br/>
-        <a href="/py-cgiform.html">Python CGI Form</a><br />
-        <form style="margin-top:30px" action="/cgi-bin/py-destroy-session.py" method="get">
-            <button type="submit">Destroy Session</button>
-        </form>
-    </body>
-    </html>
-    """
+    # First check for new Cookie, then Check for old Cookie
+    if len(name) > 0:
+        print(f"<tr><td>Cookie:</td><td>{name}</td></tr>")
+    elif os.getenv("HTTP_COOKIE") is not None and os.getenv("HTTP_COOKIE") != "destroyed":
+        print(f"<tr><td>Cookie:</td><td>{os.getenv('HTTP_COOKIE')}</td></tr>")
+    else:
+        print("<tr><td>Cookie:</td><td>None</td></tr>")
 
-if __name__ == '__main__':
-    app.run()
+    print("</table>")
+
+    # Links for other pages
+    print("<br />")
+    print("<a href=\"./cgi-bin/py-sessions-2.py\">Session Page 2</a>")
+    print("<br />")
+    print("<a href=\"./py-cgiform.html\">Python CGI Form</a>")
+    print("<br /><br />")
+
+    # Destroy Cookie button
+    print("<form action=\"./cgi-bin/py-destroy-session.py\" method=\"get\">")
+    print("<button type=\"submit\">Destroy Session</button>")
+    print("</form>")
+
+    print("</body>")
+    print("</html>")
+
+if __name__ == "__main__":
+    main()

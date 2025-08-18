@@ -1,33 +1,29 @@
 #!/usr/bin/python3
-print("Cache-Control: no-cache")
-print("Content-Type: text/html\r\n\r\n")
 
-from http.cookies import SimpleCookie
-from flask import Flask, request, make_response
+def main(argc, argv, envp):
+    # Headers
+    print("Cache-Control: no-cache")
+    print("Set-Cookie: destroyed")
+    print("Content-type: text/html\n")
 
-app = Flask(__name__)
+    # Body - HTML
+    print("<html>")
+    print("<head><title>Python Session Destroyed</title></head>")
+    print("<body>")
+    print("<h1>Python Session Destroyed</h1>")
 
-@app.route('/py-destroy-session.py')
-def destroy_session():
-    cookie = SimpleCookie(request.headers.get('Cookie'))
-    sid = cookie.get('SITE_SID') or request.args.get('sid')
-    
-    response = make_response("<html>"
-                             "<head>"
-                             "<title>Python Session Destroyed</title>"
-                             "</head>"
-                             "<body>"
-                             "<h1>Session Destroyed</h1>"
-                             "<a href=\"/py-cgiform.html\">Back to the Perl CGI Form</a><br />"
-                             "<a href=\"/cgi-bin/py-sessions-1.py\">Back to Page 1</a><br />"
-                             "<a href=\"/cgi-bin/py-sessions-2.py\">Back to Page 2</a>"
-                             "</body>"
-                             "</html>")
-    
-    # Here you would typically delete the session from your session store
-    # For example: session_store.delete(sid)
-    
-    return response
+    # Links
+    print("<a href=\"./cgi-bin/py-sessions-1.py\">Back to Page 1</a>")
+    print("<br />")
+    print("<a href=\"./cgi-bin/py-sessions-2.py\">Back to Page 2</a>")
+    print("<br />")
+    print("<a href=\"/py-cgiform.html\">Python CGI Form</a>")
 
-if __name__ == '__main__':
-    app.run()
+    print("</body>")
+    print("</html>")
+
+    return 0
+
+if __name__ == "__main__":
+    import sys
+    main(len(sys.argv), sys.argv, None)

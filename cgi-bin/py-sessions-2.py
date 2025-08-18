@@ -1,40 +1,40 @@
 #!/usr/bin/python3
-print("Cache-Control: no-cache")
-print("Content-Type: text/html\r\n\r\n")
 
-from http.cookies import SimpleCookie
-from flask import Flask, session, redirect, url_for, request, render_template_string
+import os
 
-app = Flask(__name__)
-app.secret_key = 'your_secret_key'  # Set a secret key for session management
+def main():
+    # Headers
+    print("Cache-Control: no-cache")
+    print("Content-type: text/html\n")
 
-@app.route('/py-sessions-2.py')
-def session_page_2():
-    name = session.get('username', None)
+    # Body - HTML
+    print("<html>")
+    print("<head><title>Python Sessions</title></head>")
+    print("<body>")
+    print("<h1>Python Sessions Page 2</h1>")
+    print("<table>")
 
-    html_content = f"""
-    <html>
-    <head>
-    <title>Python Sessions</title>
-    </head>
-    <body>
-    <h1>Python Sessions Page 2</h1>
-    <p><b>Name:</b> {name if name else 'You do not have a name set'}</p>
-    <br/><br/>
-    <a href="/py-sessions-1.py">Session Page 1</a><br/>
-    <a href="/py-cgiform.html">Python CGI Form</a><br />
-    <form style="margin-top:30px" action="/py-destroy-session.py" method="get">
-    <button type="submit">Destroy Session</button>
-    </form>
-    </body>
-    </html>
-    """
-    return render_template_string(html_content)
+    if os.getenv("HTTP_COOKIE") is not None and os.getenv("HTTP_COOKIE") != "destroyed":
+        print(f"<tr><td>Cookie:</td><td>{os.getenv('HTTP_COOKIE')}</td></tr>")
+    else:
+        print("<tr><td>Cookie:</td><td>None</td></tr>")
 
-@app.route('/py-destroy-session.py', methods=['GET'])
-def destroy_session():
-    session.clear()  # Clear the session
-    return redirect(url_for('session_page_2'))
+    print("</table>")
 
-if __name__ == '__main__':
-    app.run()
+    # Links for other pages
+    print("<br />")
+    print("<a href=\"./cgi-bin/py-sessions-1.py\">Session Page 1</a>")
+    print("<br />")
+    print("<a href=\"./py-cgiform.html\">C CGI Form</a>")
+    print("<br /><br />")
+
+    # Destroy Cookie button
+    print("<form action=\"./cgi-bin/py-destroy-session.py\" method=\"get\">")
+    print("<button type=\"submit\">Destroy Session</button>")
+    print("</form>")
+
+    print("</body>")
+    print("</html>")
+
+if __name__ == "__main__":
+    main()
