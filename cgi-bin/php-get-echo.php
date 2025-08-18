@@ -1,15 +1,14 @@
 <?php
 
 // print HTML file top
-print <<END;
-<!DOCTYPE html>
+
+echo <!DOCTYPE html>
 <html><head><title>GET Request Echo</title>
 </head><body><h1 align="center">Get Request Echo</h1>
-<hr>
-END
+<hr>;
 
 // The Query String is simply an environment variable
-print "<b>Query String:</b> " . $_SERVER['QUERY_STRING'] . "<br />\n";
+echo "<b>Query String:</b> " . $_SERVER['QUERY_STRING'] . "<br />\n";
 
 // Credit for this code to parse the Query string:
 // https://www.mediacollege.com/internet/perl/query-string.html
@@ -29,10 +28,10 @@ $loopCounter = 0;
 foreach (array_keys($inputArray) as $key) {
   $loopCounter += 1;
   if ($loopCounter % 2 != 0) {
-    print "$key = " . $inputArray[$key] . "<br/>\n";
+    echo "$key = " . $inputArray[$key] . "<br/>\n";
   }
 }
 
 // Print the HTML file bottom
-print "</body></html>";
+echo "</body></html>";
 ?>
