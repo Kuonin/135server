@@ -7,7 +7,10 @@ def main():
     print("Cache-Control: no-cache")
 
     # Get Name from Environment
-    username = input()
+    try:
+        username = input()
+    except:
+        username='default'
 
     # Check to see if a proper name was sent
     name = ""
