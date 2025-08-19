@@ -2,12 +2,12 @@
 // Content-type: text/html
 header("Content-type: text/html");
 
-session_start();
+// session_start();
 
-$sessionId = isset($_COOKIE['SITE_SID']) ? $_COOKIE['SITE_SID'] : (isset($_GET['sid']) ? $_GET['sid'] : null);
-if ($sessionId) {
-    session_id($sessionId);
-}
+// $sessionId = isset($_COOKIE['SITE_SID']) ? $_COOKIE['SITE_SID'] : (isset($_GET['sid']) ? $_GET['sid'] : null);
+// if ($sessionId) {
+//     session_id($sessionId);
+// }
 
 session_destroy();
 

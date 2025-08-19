@@ -34,7 +34,7 @@ echo "<table>";
 
 // First check for new Cookie, then Check for old Cookie
 if(strlen($name) > 0){
-    echo "<tr><td>Cookie:</td><td>$name</td></tr>\n";
+    echo "<tr><td>Name:</td><td>$name</td></tr>\n";
 }
 else{
     echo "<tr><td>You have not set a name yet</td></tr>\n";
