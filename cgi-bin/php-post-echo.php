@@ -28,14 +28,15 @@ if (strlen($formData) > 0) {
 }
 
 echo "<b>Message Body:</b><br />\n";
-echo "<ul>\n";
+echo $formData
+// echo "<ul>\n";
 
-# Print out the Query string
-foreach (array_keys($inputData) as $key) {
-    echo "<li>$key = " . htmlspecialchars($inputData[$key]) . "</li>\n";
-}
+// # Print out the Query string
+// foreach (array_keys($inputData) as $key) {
+//     echo "<li>$key = " . htmlspecialchars($inputData[$key]) . "</li>\n";
+// }
 
-echo "</ul>\n";
+// echo "</ul>\n";
 # Print the HTML file bottom
 echo "</body></html>\n";
 ?>

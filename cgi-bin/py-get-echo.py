@@ -16,8 +16,6 @@ import urllib.parse
 # The Query String is simply an environment variable
 print(f"<b>Raw Query String:</b> {os.environ.get('QUERY_STRING', '')}<br />\n")
 
-# Credit for this code to parse the Query string:
-# https://www.mediacollege.com/internet/perl/query-string.html
 query_string = os.environ.get('QUERY_STRING', '')
 in_dict = {}
 
