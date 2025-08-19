@@ -11,6 +11,7 @@ def main():
     # Get Name from Environment
     try:
         username = input()
+        print("input: ", username)
         with open('mytext.txt', 'w') as mytextfile:
             mytextfile.write(username)
     except:
