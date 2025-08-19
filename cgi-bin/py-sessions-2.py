@@ -7,27 +7,19 @@ def main():
     print("Cache-Control: no-cache")
     print("Content-type: text/html\n")
 
-
-    
-    try:
-        with open('mytext.txt') as mytextfile:
-            username = mytextfile.read()
-    except:
-        username = ''
-
-    name = username
-
     # Body - HTML
     print("<html>")
     print("<head><title>Python Sessions</title></head>")
     print("<body>")
     print("<h1>Python Sessions Page 2</h1>")
-    
+
     print("<p>")
-    if name == '':
-        print("No name was set")
+    temp = os.getenv('HTTP_COOKIE')
+
+    if os.getenv("HTTP_COOKIE") is not None and temp.split(';')[0] != "destroyed":
+        print("Name: ", temp.split(';')[0])
     else:
-        print("Name: ", name)
+        print("You have not set a name")
     print("</p>")
     # print("<table>")
 
