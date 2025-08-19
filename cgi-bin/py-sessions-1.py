@@ -5,13 +5,14 @@ import os
 def main():
     # Headers
     print("Cache-Control: no-cache")
-    #print("Content-type: text/html\r\n\r\n")
+    print("Content-type: text/html\r\n\r\n")
 
 
     # Get Name from Environment
     try:
         username = input()
-        username = username.split('=')[1]
+        print(username)
+        # username = username.split('=')[1]
         with open("./cgi-bin/py-session-data.txt", "w") as file:
                 file.write(username)
     except:
@@ -35,11 +36,11 @@ def main():
     #     name = username
 
     # # Set the cookie using a header, add extra \n to end headers
-    if len(name) > 0:
-        print("Content-type: text/html")
-        print(f"Set-Cookie: {name}\n")
-    else:
-        print("Content-type: text/html\n")
+    # if len(name) > 0:
+    #     print("Content-type: text/html")
+    #     print(f"Set-Cookie: {name}\n")
+    # else:
+    #     print("Content-type: text/html\n")
 
     # Body - HTML
     print("<html>")
