@@ -1,5 +1,4 @@
 #!/usr/bin/python3
-
 def main(argc, argv, envp):
     # Headers
     print("Cache-Control: no-cache")

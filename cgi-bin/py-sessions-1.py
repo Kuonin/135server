@@ -11,18 +11,27 @@ def main():
     # Get Name from Environment
     try:
         username = input()
-        os.environ["username"] = username
+        with open('mytext.txt', 'w') as mytextfile:
+            mytextfile.write(username)
     except:
-        username = os.environ.get("username")
+        try:
+            with open('mytext.txt') as mytextfile:
+                username = mytextfile.read()
+        except:
+            username = ''
+
+    name = username
+    
+    
 
     # Check to see if a proper name was sent
     # name = ""
     # if username[0] == 'u':
     #     name = username[9:]
-    if username == None:
-        name = ''
-    else:
-        name = username
+    # if username == None or username == '':
+    #     name = ''
+    # else:
+    #     name = username
 
     # # Set the cookie using a header, add extra \n to end headers
     # if len(name) > 0:

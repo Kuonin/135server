@@ -7,19 +7,36 @@ def main():
     print("Cache-Control: no-cache")
     print("Content-type: text/html\n")
 
+
+    
+    try:
+        with open('mytext.txt') as mytextfile:
+            username = mytextfile.read()
+    except:
+        username = ''
+
+    name = username
+
     # Body - HTML
     print("<html>")
     print("<head><title>Python Sessions</title></head>")
     print("<body>")
     print("<h1>Python Sessions Page 2</h1>")
-    print("<table>")
-
-    if os.getenv("HTTP_COOKIE") is not None and os.getenv("HTTP_COOKIE") != "destroyed":
-        print(f"<tr><td>Cookie:</td><td>{os.getenv('HTTP_COOKIE')}</td></tr>")
+    
+    print("<p>")
+    if name == '':
+        print("No name was set")
     else:
-        print("<tr><td>Cookie:</td><td>None</td></tr>")
+        print("Name: ", name)
+    print("</p>")
+    # print("<table>")
 
-    print("</table>")
+    # if os.getenv("HTTP_COOKIE") is not None and os.getenv("HTTP_COOKIE") != "destroyed":
+    #     print(f"<tr><td>Cookie:</td><td>{os.getenv('HTTP_COOKIE')}</td></tr>")
+    # else:
+    #     print("<tr><td>Cookie:</td><td>None</td></tr>")
+
+    # print("</table>")
 
     # Links for other pages
     print("<br />")
