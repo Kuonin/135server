@@ -28,7 +28,7 @@ if (strlen($formData) > 0) {
 }
 
 echo "<b>Message Body:</b><br />\n";
-echo $formData;
+echo "$formData";
 // echo "<ul>\n";
 
 // # Print out the Query string
