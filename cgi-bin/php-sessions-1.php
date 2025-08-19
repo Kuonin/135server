@@ -1,21 +1,29 @@
 <?php
 // Headers
 header("Cache-Control: no-cache");
+header("Content-type: text/html");
+
 
 // Get Name from Environment
 //$username = fgets(STDIN);
 
 // Check to see if a proper name was sent
-echo "$username";
-$name = $username;
+if (session_status() === PHP_SESSION_NONE) {
+    $name = $_POST['username'];
+    session_start();
+    $_SESSION['username'] = $name;
+}
+else{
+    $name = $_SESSION['username'];
+}
+
 
 // Set the cookie using a header, add extra \n to end headers
-if (strlen($name) > 0) {
-    header("Content-type: text/html");
-    setcookie("session_name", $name);
-} else {
-    header("Content-type: text/html");
-}
+// if (strlen($name) > 0) {
+//     header("Content-type: text/html");
+//     setcookie("session_name", $name);
+// } else {
+// }
 
 // Body - HTML
 echo "<html>";
@@ -25,13 +33,19 @@ echo "<h1>PHP Sessions Page 1</h1>";
 echo "<table>";
 
 // First check for new Cookie, then Check for old Cookie
-if (strlen($name) > 0) {
+if(strlen($name) > 0){
     echo "<tr><td>Cookie:</td><td>$name</td></tr>\n";
-} else if (isset($_COOKIE['session_name']) && $_COOKIE['session_name'] != "destroyed") {
-    echo "<tr><td>Cookie:</td><td>" . htmlspecialchars($_COOKIE['session_name']) . "</td></tr>\n";
-} else {
-    echo "<tr><td>Cookie:</td><td>None</td></tr>\n";
 }
+else{
+    echo "<tr><td>You have not set a name yet</td></tr>\n";
+}
+// if (strlen($name) > 0) {
+//     echo "<tr><td>Cookie:</td><td>$name</td></tr>\n";
+// } else if (isset($_COOKIE['session_name']) && $_COOKIE['session_name'] != "destroyed") {
+//     echo "<tr><td>Cookie:</td><td>" . htmlspecialchars($_COOKIE['session_name']) . "</td></tr>\n";
+// } else {
+//     echo "<tr><td>Cookie:</td><td>None</td></tr>\n";
+// }
 
 echo "</table>";
 
