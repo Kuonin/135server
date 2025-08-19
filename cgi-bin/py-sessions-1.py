@@ -5,21 +5,15 @@ import os
 def main():
     # Headers
     print("Cache-Control: no-cache")
-    print("Content-type: text/html\r\n\r\n")
+    #print("Content-type: text/html\r\n\r\n")
 
 
     # Get Name from Environment
     try:
         username = input()
-        print("input: ", username)
-        with open('mytext.txt', 'w') as mytextfile:
-            mytextfile.write(username)
+        username = username.split('=')[1]
     except:
-        try:
-            with open('mytext.txt') as mytextfile:
-                username = mytextfile.read()
-        except:
-            username = ''
+        username = ''
 
     name = username
     
@@ -35,11 +29,11 @@ def main():
     #     name = username
 
     # # Set the cookie using a header, add extra \n to end headers
-    # if len(name) > 0:
-    #     print("Content-type: text/html")
-    #     print(f"Set-Cookie: {name}\n")
-    # else:
-    #     print("Content-type: text/html\n")
+    if len(name) > 0:
+        print("Content-type: text/html")
+        print(f"Set-Cookie: {name}\n")
+    else:
+        print("Content-type: text/html\n")
 
     # Body - HTML
     print("<html>")
@@ -47,21 +41,23 @@ def main():
     print("<body>")
     print("<h1>Python Sessions Page 1</h1>")
     print("<p>")
-    if name == '':
-        print("No name was set")
-    else:
-        print("Name: ", name)
-    print("</p>")
+    # if name == '':
+    #     print("No name was set")
+    # else:
+    #     print("Name: ", name)
+    # print("</p>")
     # print("<table>")
 
     # First check for new Cookie, then Check for old Cookie
-    # if len(name) > 0:
-    #     print(f"<tr><td>Cookie:</td><td>{name}</td></tr>")
-    # elif os.getenv("HTTP_COOKIE") is not None and os.getenv("HTTP_COOKIE") != "destroyed":
-    #     print(f"<tr><td>Cookie:</td><td>{os.getenv('HTTP_COOKIE')}</td></tr>")
-    # else:
-    #     print("<tr><td>Cookie:</td><td>None</td></tr>")
+    temp = os.getenv('HTTP_COOKIE').split(';')
 
+    if len(name) > 0:
+        print("Name: ", name)
+    elif os.getenv("HTTP_COOKIE") is not None and temp != "destroyed":
+        print("Name: ", temp)
+    else:
+        print("You have not set a name")
+    print("</p>")
     # print("</table>")
 
     # Links for other pages
