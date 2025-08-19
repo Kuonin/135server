@@ -53,8 +53,8 @@ def main():
 
     if len(name) > 0:
         print("Name: ", name)
-    elif os.getenv("HTTP_COOKIE") is not None and temp != "destroyed":
-        print("Name: ", temp)
+    elif os.getenv("HTTP_COOKIE") is not None and temp.split(';')[0] != "destroyed":
+        print("Name: ", temp.split(';')[0])
     else:
         print("You have not set a name")
     print("</p>")
