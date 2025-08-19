@@ -17,6 +17,10 @@ print('''<!DOCTYPE html>
 # Get the current URL which includes the Query String
 #url = os.environ["REQUEST_URI"]
 url = input()
+try:
+    url = input()
+except:
+    url = os.environ["REQUEST_URI"]
 
 # Parse the URL into its subcomponents
 parsed = ulp.urlparse(url)
@@ -31,16 +35,17 @@ dic = ulp.parse_qs(parsed.query, keep_blank_values=True)
 
 # Print out the Message Body
 print("<b>Message Body:</b><br />\n")
-print("Raw:")
 print(url)
-print("Processed:")
-print("<ul>\n")
+# print("Raw:")
+# print(url)
+# print("Processed:")
+# print("<ul>\n")
 
-# Print out the Query string
-for key in dic.keys():
-    value = html.escape(dic.getvalue(key, ''))
-    print(f"<li>{html.escape(key)} = {value}</li>\n")
+# # Print out the Query string
+# for key in dic.keys():
+#     value = html.escape(dic.getvalue(key, ''))
+#     print(f"<li>{html.escape(key)} = {value}</li>\n")
 
-print("</ul>\n")
+# print("</ul>\n")
 # Print the HTML file bottom
 print("</body></html>\n")
