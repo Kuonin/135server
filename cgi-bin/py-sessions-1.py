@@ -17,13 +17,13 @@ def main():
 
     if(username == ''):
         try:
-            with open("./cgi-bin/py-session-data.txt", "r") as file:
+            with open("/cgi-bin/py-session-data.txt", "r") as file:
                 username = file.read()
         except:
             username = ''
     if(username != ''):
         try:
-            with open("./cgi-bin/py-session-data.txt", "w") as file:
+            with open("/cgi-bin/py-session-data.txt", "w") as file:
                 file.write(username)
         except:
             pass
