@@ -5,7 +5,7 @@ import os
 def main():
     # Headers
     print("Cache-Control: no-cache")
-    print("Content-type: text/html")
+    print("Content-type: text/html\r\n\r\n")
 
 
     # Get Name from Environment
