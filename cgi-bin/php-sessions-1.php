@@ -6,11 +6,10 @@ header("Content-type: text/html");
 
 // Get Name from Environment
 //$username = fgets(STDIN);
-
+session_start();
 // Check to see if a proper name was sent
-if (session_status() === PHP_SESSION_NONE) {
+if ($_SESSION['username'] == '') {
     $name = $_POST['username'];
-    session_start();
     $_SESSION['username'] = $name;
 }
 else{

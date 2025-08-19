@@ -23,7 +23,7 @@ echo "<h1>PHP Sessions Page 2</h1>";
 if ($name) {
     echo "<p><b>Name:</b> " . htmlspecialchars($name) . "</p>";
 } else {
-    echo "<p><b>Name:</b> You do not have a name set</p>";
+    echo "<p>You do not have a name set</p>";
 }
 echo "<br/><br/>";
 echo "<a href=\"/cgi-bin/php-sessions-1.php\">Session Page 1</a><br/>";
