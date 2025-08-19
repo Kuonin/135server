@@ -9,17 +9,24 @@ def main():
 
 
     # Get Name from Environment
-    try:
+    try: 
         username = input()
         username = username.split('=')[1]
-        with open("./cgi-bin/py-session-data.txt", "w") as file:
-                file.write(username)
     except:
+        username = ''
+
+    if(username == ''):
         try:
             with open("./cgi-bin/py-session-data.txt", "r") as file:
                 username = file.read()
         except:
-            username = username
+            username = ''
+    if(username != ''):
+        try:
+            with open("./cgi-bin/py-session-data.txt", "w") as file:
+                file.write(username)
+        except:
+            pass
 
     name = username
     
