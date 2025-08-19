@@ -11,8 +11,7 @@ def main():
     # Get Name from Environment
     try:
         username = input()
-        print(username)
-        # username = username.split('=')[1]
+        username = username.split('=')[1]
         with open("./cgi-bin/py-session-data.txt", "w") as file:
                 file.write(username)
     except:
@@ -20,7 +19,7 @@ def main():
             with open("./cgi-bin/py-session-data.txt", "r") as file:
                 username = file.read()
         except:
-            username = ''
+            username = username
 
     name = username
     
