@@ -12,8 +12,14 @@ def main():
     try:
         username = input()
         username = username.split('=')[1]
+        with open("./cgi-bin/py-session-data.txt", "w") as file:
+                file.write(username)
     except:
-        username = ''
+        try:
+            with open("./cgi-bin/py-session-data.txt", "r") as file:
+                username = file.read()
+        except:
+            username = ''
 
     name = username
     
@@ -41,23 +47,23 @@ def main():
     print("<body>")
     print("<h1>Python Sessions Page 1</h1>")
     print("<p>")
-    # if name == '':
-    #     print("No name was set")
-    # else:
-    #     print("Name: ", name)
-    # print("</p>")
+    if name == '':
+        print("No name was set")
+    else:
+        print("Name: ", name)
+    print("</p>")
     # print("<table>")
 
     # First check for new Cookie, then Check for old Cookie
-    temp = os.getenv('HTTP_COOKIE')
+    # temp = os.getenv('HTTP_COOKIE')
 
-    if len(name) > 0:
-        print("Name: ", name)
-    elif os.getenv("HTTP_COOKIE") is not None and temp.split(';')[0] != "destroyed":
-        print("Name: ", temp.split(';')[0])
-    else:
-        print("You have not set a name")
-    print("</p>")
+    # if len(name) > 0:
+    #     print("Name: ", name)
+    # elif os.getenv("HTTP_COOKIE") is not None and temp.split(';')[0] != "destroyed":
+    #     print("Name: ", temp.split(';')[0])
+    # else:
+    #     print("You have not set a name")
+    # print("</p>")
     # print("</table>")
 
     # Links for other pages
