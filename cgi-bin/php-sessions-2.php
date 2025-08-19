@@ -1,6 +1,6 @@
 <?php
 // // Access PHP Session
-// session_start();
+session_start();
 
 // // Get the Session ID from the Cookie
 // $sid = isset($_COOKIE['session_name']) ? $_COOKIE['session_)name'] : null;
