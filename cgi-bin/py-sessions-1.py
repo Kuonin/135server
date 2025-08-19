@@ -49,7 +49,7 @@ def main():
     # print("<table>")
 
     # First check for new Cookie, then Check for old Cookie
-    temp = os.getenv('HTTP_COOKIE')[0]
+    temp = os.getenv('HTTP_COOKIE')
 
     if len(name) > 0:
         print("Name: ", name)
