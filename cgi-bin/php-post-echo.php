@@ -31,12 +31,8 @@ echo "<b>Message Body:</b><br />\n";
 echo "<ul>\n";
 
 # Print out the Query string
-$loopCounter = 0;
 foreach (array_keys($inputData) as $key) {
-    $loopCounter += 1;
-    if ($loopCounter % 2 != 0) {
-        echo "<li>$key = " . htmlspecialchars($inputData[$key]) . "</li>\n";
-    }
+    echo "<li>$key = " . htmlspecialchars($inputData[$key]) . "</li>\n";
 }
 
 echo "</ul>\n";

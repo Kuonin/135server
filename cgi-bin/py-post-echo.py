@@ -15,7 +15,8 @@ print('''<!DOCTYPE html>
 
 # Read in the Post data
 # Get the current URL which includes the Query String
-url = os.environ["REQUEST_URI"]
+#url = os.environ["REQUEST_URI"]
+url = input()
 
 # Parse the URL into its subcomponents
 parsed = ulp.urlparse(url)
@@ -30,15 +31,15 @@ dic = ulp.parse_qs(parsed.query, keep_blank_values=True)
 
 # Print out the Message Body
 print("<b>Message Body:</b><br />\n")
+print("Raw:")
+print(url)
+print("Processed:")
 print("<ul>\n")
 
 # Print out the Query string
-loop = 0
 for key in dic.keys():
-    loop += 1
-    if loop % 2 != 0:
-        value = html.escape(dic.getvalue(key, ''))
-        print(f"<li>{html.escape(key)} = {value}</li>\n")
+    value = html.escape(dic.getvalue(key, ''))
+    print(f"<li>{html.escape(key)} = {value}</li>\n")
 
 print("</ul>\n")
 # Print the HTML file bottom

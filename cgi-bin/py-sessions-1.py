@@ -5,41 +5,54 @@ import os
 def main():
     # Headers
     print("Cache-Control: no-cache")
+    print("Content-type: text/html")
+
 
     # Get Name from Environment
     try:
         username = input()
+        os.environ["username"] = username
     except:
-        username='default'
+        username = os.environ.get("username")
 
     # Check to see if a proper name was sent
-    name = ""
-    if username[0] == 'u':
-        name = username[9:]
-
-    # Set the cookie using a header, add extra \n to end headers
-    if len(name) > 0:
-        print("Content-type: text/html")
-        print(f"Set-Cookie: {name}\n")
+    # name = ""
+    # if username[0] == 'u':
+    #     name = username[9:]
+    if username == None:
+        name = ''
     else:
-        print("Content-type: text/html\n")
+        name = username
+
+    # # Set the cookie using a header, add extra \n to end headers
+    # if len(name) > 0:
+    #     print("Content-type: text/html")
+    #     print(f"Set-Cookie: {name}\n")
+    # else:
+    #     print("Content-type: text/html\n")
 
     # Body - HTML
     print("<html>")
     print("<head><title>Python Sessions</title></head>")
     print("<body>")
     print("<h1>Python Sessions Page 1</h1>")
-    print("<table>")
+    print("<p>")
+    if name == '':
+        print("No name was set")
+    else:
+        print("Name: ", name)
+    print("</p>")
+    # print("<table>")
 
     # First check for new Cookie, then Check for old Cookie
-    if len(name) > 0:
-        print(f"<tr><td>Cookie:</td><td>{name}</td></tr>")
-    elif os.getenv("HTTP_COOKIE") is not None and os.getenv("HTTP_COOKIE") != "destroyed":
-        print(f"<tr><td>Cookie:</td><td>{os.getenv('HTTP_COOKIE')}</td></tr>")
-    else:
-        print("<tr><td>Cookie:</td><td>None</td></tr>")
+    # if len(name) > 0:
+    #     print(f"<tr><td>Cookie:</td><td>{name}</td></tr>")
+    # elif os.getenv("HTTP_COOKIE") is not None and os.getenv("HTTP_COOKIE") != "destroyed":
+    #     print(f"<tr><td>Cookie:</td><td>{os.getenv('HTTP_COOKIE')}</td></tr>")
+    # else:
+    #     print("<tr><td>Cookie:</td><td>None</td></tr>")
 
-    print("</table>")
+    # print("</table>")
 
     # Links for other pages
     print("<br />")
