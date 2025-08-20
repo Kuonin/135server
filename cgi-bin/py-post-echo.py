@@ -19,7 +19,7 @@ print('''<!DOCTYPE html>
 try:
     url = input()
 except:
-    url = os.environ["REQUEST_URI"]
+    url = ''
 
 # Parse the URL into its subcomponents
 # parsed = ulp.urlparse(url)
