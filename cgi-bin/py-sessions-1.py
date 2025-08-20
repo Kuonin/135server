@@ -5,7 +5,7 @@ import os
 def main():
     # Headers
     print("Cache-Control: no-cache")
-    print("Content-type: text/html\r\n\r\n")
+    # print("Content-type: text/html\r\n\r\n")
 
 
     # Get Name from Environment
@@ -30,23 +30,13 @@ def main():
 
     name = username
     
-    
-
-    # Check to see if a proper name was sent
-    # name = ""
-    # if username[0] == 'u':
-    #     name = username[9:]
-    # if username == None or username == '':
-    #     name = ''
-    # else:
-    #     name = username
 
     # # Set the cookie using a header, add extra \n to end headers
-    # if len(name) > 0:
-    #     print("Content-type: text/html")
-    #     print(f"Set-Cookie: {name}\n")
-    # else:
-    #     print("Content-type: text/html\n")
+    if len(name) > 0:
+        print("Content-type: text/html")
+        print(f"Set-Cookie: {name}\n")
+    else:
+        print("Content-type: text/html\n")
 
     # Body - HTML
     print("<html>")
@@ -54,24 +44,22 @@ def main():
     print("<body>")
     print("<h1>Python Sessions Page 1</h1>")
     print("<p>")
-    if name == '':
-        print("No name was set")
-    else:
-        print("Name: ", name)
-    print("</p>")
-    # print("<table>")
+    # if name == '':
+    #     print("No name was set")
+    # else:
+    #     print("Name: ", name)
+    # print("</p>")
 
     # First check for new Cookie, then Check for old Cookie
-    # temp = os.getenv('HTTP_COOKIE')
+    temp = os.getenv('HTTP_COOKIE')
 
-    # if len(name) > 0:
-    #     print("Name: ", name)
-    # elif os.getenv("HTTP_COOKIE") is not None and temp.split(';')[0] != "destroyed":
-    #     print("Name: ", temp.split(';')[0])
-    # else:
-    #     print("You have not set a name")
-    # print("</p>")
-    # print("</table>")
+    if len(name) > 0:
+        print("Name: ", name)
+    elif os.getenv("HTTP_COOKIE") is not None and temp.split(';')[0] != "destroyed":
+        print("Name: ", temp.split(';')[0])
+    else:
+        print("You have not set a name")
+    print("</p>")
 
     # Links for other pages
     print("<br />")
