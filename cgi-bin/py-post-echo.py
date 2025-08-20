@@ -16,21 +16,20 @@ print('''<!DOCTYPE html>
 # Read in the Post data
 # Get the current URL which includes the Query String
 #url = os.environ["REQUEST_URI"]
-url = input()
 try:
     url = input()
 except:
     url = os.environ["REQUEST_URI"]
 
 # Parse the URL into its subcomponents
-parsed = ulp.urlparse(url)
+# parsed = ulp.urlparse(url)
 
-# Parse the Query String portion of the URL;
-# this returns a dictionary of 'key:value' pairs,
-# with 'key' being the name of the input in the HTML form,
-# and 'value' being a list which contains what was
-# entered by the user as that input in the same HTML form
-dic = ulp.parse_qs(parsed.query, keep_blank_values=True)
+# # Parse the Query String portion of the URL;
+# # this returns a dictionary of 'key:value' pairs,
+# # with 'key' being the name of the input in the HTML form,
+# # and 'value' being a list which contains what was
+# # entered by the user as that input in the same HTML form
+# dic = ulp.parse_qs(parsed.query, keep_blank_values=True)
 
 
 # Print out the Message Body
