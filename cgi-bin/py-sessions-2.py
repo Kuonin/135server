@@ -21,14 +21,6 @@ def main():
     else:
         print("You have not set a name")
     print("</p>")
-    # print("<table>")
-
-    # if os.getenv("HTTP_COOKIE") is not None and os.getenv("HTTP_COOKIE") != "destroyed":
-    #     print(f"<tr><td>Cookie:</td><td>{os.getenv('HTTP_COOKIE')}</td></tr>")
-    # else:
-    #     print("<tr><td>Cookie:</td><td>None</td></tr>")
-
-    # print("</table>")
 
     # Links for other pages
     print("<br />")

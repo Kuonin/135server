@@ -3,9 +3,6 @@
 header("Cache-Control: no-cache");
 header("Content-type: text/html");
 
-
-// Get Name from Environment
-//$username = fgets(STDIN);
 session_start();
 // Check to see if a proper name was sent
 if ($_SESSION['username'] == '') {
@@ -17,36 +14,23 @@ else{
 }
 
 
-// Set the cookie using a header, add extra \n to end headers
-// if (strlen($name) > 0) {
-//     header("Content-type: text/html");
-//     setcookie("session_name", $name);
-// } else {
-// }
-
 // Body - HTML
 echo "<html>";
 echo "<head><title>PHP Sessions</title></head>\n";
 echo "<body>";
 echo "<h1>PHP Sessions Page 1</h1>";
-echo "<table>";
+echo "<p>";
 
 // First check for new Cookie, then Check for old Cookie
 if(strlen($name) > 0){
-    echo "<tr><td>Name:</td><td>$name</td></tr>\n";
+    echo "Name:$name\n";
 }
 else{
-    echo "<tr><td>You have not set a name yet</td></tr>\n";
+    echo "You have not set a name yet\n";
 }
-// if (strlen($name) > 0) {
-//     echo "<tr><td>Cookie:</td><td>$name</td></tr>\n";
-// } else if (isset($_COOKIE['session_name']) && $_COOKIE['session_name'] != "destroyed") {
-//     echo "<tr><td>Cookie:</td><td>" . htmlspecialchars($_COOKIE['session_name']) . "</td></tr>\n";
-// } else {
-//     echo "<tr><td>Cookie:</td><td>None</td></tr>\n";
-// }
 
-echo "</table>";
+
+echo "</p>";
 
 // Links for other pages
 echo "<br />";

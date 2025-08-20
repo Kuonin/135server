@@ -2,10 +2,6 @@
 // // Access PHP Session
 session_start();
 
-// // Get the Session ID from the Cookie
-// $sid = isset($_COOKIE['session_name']) ? $_COOKIE['session_)name'] : null;
-// $session = new SessionHandler();
-
 // // Access Stored Data
 $name = isset($_SESSION['username']) ? $_SESSION['username'] : null;
 

@@ -16,8 +16,6 @@ print(f"<p><b>HTTP Protocol:</b> {os.environ.get('SERVER_PROTOCOL')}</p>")
 print(f"<p><b>HTTP Method:</b> {os.environ.get('REQUEST_METHOD')}</p>")
 print(f"<p><b>Query String:</b> {os.environ.get('QUERY_STRING')}</p>")
 
-# NOTE: Although the Query String is an environment variable, the Message Body
-# must be read in from the Standard Input with any language using CGI.
 # Reading from standard input
 content_length = int(os.environ.get('CONTENT_LENGTH', 0))
 form_data = sys.stdin.read(content_length)
