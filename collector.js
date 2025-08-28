@@ -40,13 +40,25 @@ let css = "disabled";
 // entries.forEach((entry) => {
 //   console.log(`${entry.name}: domComplete time: ${entry.domComplete}ms`);
 // });
+let loadTime = null;
+let timingObj = null;
+let startTime = null;
+let endTime = null;
+
 window.addEventListener("load", function(){    
     setTimeout(function(){
 
-        const entries = window.performance.getEntriesByType("navigation");
-        entries.forEach((entry) => {
-          console.log(`${entry.name}: domComplete time: ${entry.domComplete}ms`);
-        });
+        const entry = window.performance.getEntriesByType("navigation")[0];
+        loadTime = entry.domComplete;
+        startTime = entry.domContentLoadedEventStart;
+        endTime = entry.domContentLoadedEventEnd;
+        timingObj = endTime - startTime;
+        console.log("loadtime: ${loadTime}");
+        console.log("startT: ${startTime}");
+        console.log("end: ${endTime}");
+        console.log("tot: ${timeObj}");
+
+        
     }, 0);
 });
 
