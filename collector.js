@@ -50,8 +50,8 @@ window.addEventListener("load", function(){
 
         const entry = window.performance.getEntriesByType("navigation")[0];
         loadTime = entry.domComplete;
-        startTime = entry.domContentLoadedEventStart;
-        endTime = entry.domContentLoadedEventEnd;
+        startTime = entry.loadEventStart;
+        endTime = entry.loadEventEnd;
         timeObj = endTime - startTime;
         console.log(`loadtime: ${loadTime}`);
         console.log(`startT: ${startTime}`);
