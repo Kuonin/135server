@@ -16,8 +16,8 @@ let js = "enabled";
 let image = "unavailable";
 
 function noimage(){
-    const image = document.getElementById('flag');
-    if(image.complete){
+    const i = document.getElementById('flag');
+    if(i.complete){
         console.log("Image available");
         image = "available";
     }
