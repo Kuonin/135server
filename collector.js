@@ -13,15 +13,22 @@ let wHeight = window.innerHeight;
 
 //js checked using no script tag in index.html
 let js = "enabled";
-let image = "unavailable";
+let image = "available";
 
 function noimage(){
-    if ((document.getElementById('flag').offsetWidth==1&&document.getElementById('flag').readyState=='complete')
-        ||(document.getElementById('flag').offsetWidth==1&&document.getElementById('flag').readyState==undefined)){
+    const image = document.getElementById('flag');
+    if(image.complete){
+        console.log("Image available");
+    }
+    else{
+        console.log("Images unavailable");
+    }
+    // if ((document.getElementById('flag').offsetWidth==1&&document.getElementById('flag').readyState=='complete')
+    //     ||(document.getElementById('flag').offsetWidth==1&&document.getElementById('flag').readyState==undefined)){
     
-            image = "available";
-            console.log("Image available");
-        }
+    //         image = "unavailable";
+    //         console.log("Image unavailable");
+    //     }
 }
 
 let css = "disabled";
@@ -61,5 +68,5 @@ document.addEventListener("DOMContentLoaded", (event) => {
         console.log("Footer does not exist");
     }
   noimage();
-  sendData();
+  //sendData();
 });
