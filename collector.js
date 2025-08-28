@@ -41,7 +41,7 @@ let css = "disabled";
 //   console.log(`${entry.name}: domComplete time: ${entry.domComplete}ms`);
 // });
 let loadTime = null;
-let timingObj = null;
+let timeObj = null;
 let startTime = null;
 let endTime = null;
 
