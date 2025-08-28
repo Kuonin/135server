@@ -15,13 +15,18 @@ let wHeight = window.innerHeight;
 let js = "enabled";
 let image = "unavailable";
 
-const img = new Image();
-img.onload = function(){
-    image = "available";
+function noimage(){
+    if ((document.getElementById('flag').offsetWidth==1&&document.getElementById('flag').readyState=='complete')
+        ||(document.getElementById('flag').offsetWidth==1&&document.getElementById('flag').readyState==undefined)){
+    
+            image = "available";
+            console.log("Image available");
+        }
 }
+noimage();
 
 let css = "disabled";
-const foot = document.querySelector('footer');
+const foot = document.getElementById('love');
 if (foot != null){
     const style = window.getComputedStyle(foot);
     if(style.getPropertyValue('position') === 'fixed'){
