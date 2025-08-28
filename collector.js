@@ -21,7 +21,7 @@ img.onload = function(){
 }
 
 let css = "disabled";
-if(document.querySelector("footer").getPropertyValue('position') === 'fixed'){
+if(window.getComputedStyle(document.querySelector("footer")).getPropertyValue('position') === 'fixed'){
     css = "enabled";
 }
 
@@ -38,7 +38,10 @@ async function sendData(){
          screenWidth: sWidth,
          screenHeight: sHeight,
          windowWidth: wWidth,
-         windowHeight: wHeight
+         windowHeight: wHeight,
+         javascript : js,
+         imageOn: image,
+         cssEnabled: css
          }),
     // …
     });
