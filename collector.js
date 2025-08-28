@@ -21,11 +21,17 @@ img.onload = function(){
 }
 
 let css = "disabled";
-const foot = document.querySelector("footer");
-const style = window.getComputedStyle(foot);
-if(style.getPropertyValue('position') === 'fixed'){
-    css = "enabled";
+const foot = document.querySelector('footer');
+if (foot != null){
+    const style = window.getComputedStyle(foot);
+    if(style.getPropertyValue('position') === 'fixed'){
+        css = "enabled";
+    }
 }
+else{
+    console.log("Footer does not exist");
+}
+
 
 async function sendData(){
     const response = await fetch("https://katiel.site/json/posts", {
