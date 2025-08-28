@@ -21,7 +21,9 @@ img.onload = function(){
 }
 
 let css = "disabled";
-if(window.getComputedStyle(document.querySelector("footer")).getPropertyValue('position') === 'fixed'){
+const foot = document.querySelector("footer");
+const style = window.getComputedStyle(foot);
+if(style.getPropertyValue('position') === 'fixed'){
     css = "enabled";
 }
 
