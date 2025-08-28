@@ -36,9 +36,18 @@ let css = "disabled";
 
 //Static Collection end
 
-const entries = window.performance.getEntriesByType("navigation");
-entries.forEach((entry) => {
-  console.log(`${entry.name}: domComplete time: ${entry.domComplete}ms`);
+// const entries = window.performance.getEntriesByType("navigation");
+// entries.forEach((entry) => {
+//   console.log(`${entry.name}: domComplete time: ${entry.domComplete}ms`);
+// });
+window.addEventListener("load", function(){    
+    setTimeout(function(){
+
+        const entries = window.performance.getEntriesByType("navigation");
+        entries.forEach((entry) => {
+          console.log(`${entry.name}: domComplete time: ${entry.domComplete}ms`);
+        });
+    }, 0);
 });
 
 async function sendData(){
