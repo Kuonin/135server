@@ -23,20 +23,8 @@ function noimage(){
             console.log("Image available");
         }
 }
-noimage();
 
 let css = "disabled";
-const foot = document.getElementById('love');
-if (foot != null){
-    const style = window.getComputedStyle(foot);
-    if(style.getPropertyValue('position') === 'fixed'){
-        css = "enabled";
-    }
-}
-else{
-    console.log("Footer does not exist");
-}
-
 
 async function sendData(){
     const response = await fetch("https://katiel.site/json/posts", {
@@ -59,5 +47,18 @@ async function sendData(){
     // …
     });
 }
-
-sendData();
+document.addEventListener("DOMContentLoaded", (event) => {
+  console.log("DOM fully loaded and parsed");
+  const foot = document.getElementById('love');
+    if (foot != null){
+        const style = window.getComputedStyle(foot);
+        if(style.getPropertyValue('position') === 'fixed'){
+            css = "enabled";
+        }
+    }
+    else{
+        console.log("Footer does not exist");
+    }
+  noimage();
+  sendData();
+});
