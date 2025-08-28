@@ -52,7 +52,7 @@ window.addEventListener("load", function(){
         loadTime = entry.domComplete;
         startTime = entry.domContentLoadedEventStart;
         endTime = entry.domContentLoadedEventEnd;
-        timingObj = endTime - startTime;
+        timeObj = endTime - startTime;
         console.log(`loadtime: ${loadTime}`);
         console.log(`startT: ${startTime}`);
         console.log(`end: ${endTime}`);
