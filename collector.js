@@ -47,6 +47,7 @@ async function sendData(){
     // …
     });
 }
+
 document.addEventListener("DOMContentLoaded", (event) => {
   console.log("DOM fully loaded and parsed");
   const foot = document.getElementById('love');
