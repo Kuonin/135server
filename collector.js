@@ -13,12 +13,13 @@ let wHeight = window.innerHeight;
 
 //js checked using no script tag in index.html
 let js = "enabled";
-let image = "available";
+let image = "unavailable";
 
 function noimage(){
     const image = document.getElementById('flag');
     if(image.complete){
         console.log("Image available");
+        image = "available";
     }
     else{
         console.log("Images unavailable");
@@ -32,6 +33,13 @@ function noimage(){
 }
 
 let css = "disabled";
+
+//Static Collection end
+
+const entries = window.performance.getEntriesByType("navigation");
+entries.forEach((entry) => {
+  console.log(`${entry.name}: domComplete time: ${entry.domComplete}ms`);
+});
 
 async function sendData(){
     const response = await fetch("https://katiel.site/json/posts", {
