@@ -107,15 +107,38 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
 //continuous data collection
 window.addEventListener("error", (event) => {
-//   log.textContent = `${log.textContent}${event.type}: ${event.message}\n`;
   console.log(event);
-  console.log(event.source);
-//   send({
-//     event: "error",
-//     message: event.message,
-//     source: event.source,
-//     line: event.lineno
-//   });
+  console.log(event.filename);
+  send({
+    event: "error",
+    message: event.message,
+    source: event.filename,
+    line: event.lineno
+  });
+
+});
+let mousex = 0;
+let mousey = 0;
+window.addEventListener("mousemove", (e) => {
+  console.log("Mouse Move");
+//   console.log(e.pageX);
+//   console.log(e.pageY);
+  console.log(e.buttons);
+  console.log(e.x);
+  console.log(e.y);
+  mousex = e.x;
+  mousey = e.y;
+});
+window.addEventListener("mouseup", (e) => {
+    console.log("Mouse Click");
+    console.log(e.buttons);
+    console.log(e.x);
+    console.log(e.y);
+});
+window.addEventListener("scroll", (e) => {
+  console.log("Scroll");
+  console.log(mousex);
+  console.log(mousey);
 
 });
 
@@ -129,5 +152,3 @@ async function send(json){
     // …
     });
 }
-
-b
