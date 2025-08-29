@@ -181,6 +181,7 @@ window.addEventListener("keydown", (e) => {
     // })
 });
 let prev = 0;
+let duration = 0;
 
 function noIdlingHere() {
 
@@ -193,16 +194,22 @@ function noIdlingHere() {
                 + currentdate.getMinutes() + ":" 
                 + currentdate.getSeconds();
 
-        console.log(datetime);
-        console.log(performance.now());
-        console.log(performance.now() - prev);
-        prev = performance.now();
+        duration = performance.now() - prev;
+        if(duration >= 2000)
+        {
+            console.log(datetime);
+            console.log(performance.now());
+
+            console.log(performance.now() - prev);
+            prev = performance.now();
+        }
+        
     }
 
     let t; // must be declared here
     function resetTimer() {
         clearTimeout(t); // global function
-        t = setTimeout(yourFunction, 0);  // time is in milliseconds (10 min)
+        t = setTimeout(yourFunction, 0);  // time is in milliseconds timeout so doesn't register 
     } 
 
     window.addEventListener('load', resetTimer, true);
