@@ -170,7 +170,9 @@ window.addEventListener("scroll", (e) => {
 });
 
 window.addEventListener("keydown", (e) => {
-  console.log(e);
+  console.log(e.key);
+  console.log(e.ctrlKey);
+  console.log(e.shiftKey);
 });
 
 async function send(json){
