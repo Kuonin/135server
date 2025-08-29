@@ -197,9 +197,16 @@ function noIdlingHere() {
         duration = performance.now() - prev;
         if(duration >= 2000)
         {
-            console.log(datetime);
-            console.log(performance.now());
-            console.log(performance.now() - prev);
+            console.log(duration);
+            // send({
+            //     event: "idle",
+            //     dur : duration,
+            //     endDate: datetime,
+            //     endTime: performance.now()
+            // });
+            // console.log(datetime);
+            // console.log(performance.now());
+            // console.log(performance.now() - prev);
             
         }
         prev = performance.now();
