@@ -34,6 +34,9 @@ function noimage(){
 
 let css = "disabled";
 
+let con = navigator.connection.effectiveType;
+console.log(con);
+
 //Static Collection end
 
 // const entries = window.performance.getEntriesByType("navigation");
@@ -48,7 +51,7 @@ let endTime = null;
 window.addEventListener("load", function(){    
     setTimeout(function(){
 
-        const entry = window.performance.getEntriesByType("navigation")[0];
+        const entry = performance.getEntriesByType("navigation")[0];
         loadTime = entry.domComplete;
         startTime = entry.loadEventStart;
         endTime = entry.loadEventEnd;
@@ -57,6 +60,7 @@ window.addEventListener("load", function(){
         console.log(`startT: ${startTime}`);
         console.log(`end: ${endTime}`);
         console.log(`tot: ${timeObj}`);
+        console.log(entry.duration)
 
         
     }, 0);
