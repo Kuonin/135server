@@ -34,11 +34,8 @@ function noimage(){
 
 let css = "disabled";
 
-let con = navigator.connection.type;
-console.log(con);
-
 // check if connection object present
-const connection =
+let connection =
 navigator.connection || navigator.mozConnection || navigator.webkitConnection;
 
 // then use the effectiveType property
@@ -47,10 +44,6 @@ console.log(connection.effectiveType);
 
 //Static Collection end
 
-// const entries = window.performance.getEntriesByType("navigation");
-// entries.forEach((entry) => {
-//   console.log(`${entry.name}: domComplete time: ${entry.domComplete}ms`);
-// });
 let loadTime = null;
 let timeObj = null;
 let startTime = null;
@@ -60,19 +53,14 @@ window.addEventListener("load", function(){
     setTimeout(function(){
 
         const entry = performance.getEntriesByType("navigation")[0];
-        loadTime = entry.domComplete;
-        startTime = entry.loadEventStart;
+        loadTime = entry.duration;
+        startTime = entry.startTime;
         endTime = entry.loadEventEnd;
-        timeObj = endTime - startTime;
-        console.log(`loadtime: ${loadTime}`);
-        console.log(`startT: ${startTime}`);
-        console.log(`end: ${endTime}`);
-        console.log(`tot: ${timeObj}`);
-        console.log(entry.duration)
-
-        
+        timeObj = entry;
     }, 0);
 });
+
+// perfroamnce data collection end
 
 async function sendData(){
     const response = await fetch("https://katiel.site/json/posts", {
@@ -90,7 +78,12 @@ async function sendData(){
          windowHeight: wHeight,
          javascript : js,
          imageOn: image,
-         cssEnabled: css
+         cssEnabled: css,
+         networkCon : connection,
+         timingObj : timeObj,
+         startLoad : startTime,
+         endLoad : endTime,
+         totalLoadT : loadTime
          }),
     // …
     });
@@ -111,3 +104,10 @@ document.addEventListener("DOMContentLoaded", (event) => {
   noimage();
   //sendData();
 });
+
+//continuous data collection
+window.addEventListener("error", (event) => {
+  log.textContent = `${log.textContent}${event.type}: ${event.message}\n`;
+  console.log(event);
+});
+b
