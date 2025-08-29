@@ -108,13 +108,14 @@ document.addEventListener("DOMContentLoaded", (event) => {
 //continuous data collection
 window.addEventListener("error", (event) => {
 //   log.textContent = `${log.textContent}${event.type}: ${event.message}\n`;
-  console.log(event.message);
-  send({
-    event: "error",
-    message: event.message,
-    source: event.source,
-    line: event.lineno
-  })
+  console.log(event);
+  console.log(event.source);
+//   send({
+//     event: "error",
+//     message: event.message,
+//     source: event.source,
+//     line: event.lineno
+//   });
 
 });
 
@@ -128,13 +129,5 @@ async function send(json){
     // …
     });
 }
-// window.onerror = (a, b, c, d, e) => {
-//   console.log(`message: ${a}`);
-//   console.log(`source: ${b}`);
-//   console.log(`lineno: ${c}`);
-//   console.log(`colno: ${d}`);
-//   console.log(`error: ${e}`);
 
-//   return true;
-// };
 b
