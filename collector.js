@@ -169,6 +169,10 @@ window.addEventListener("scroll", (e) => {
 //   });
 });
 
+window.addEventListener("keydown", (e) => {
+  console.log(e);
+});
+
 async function send(json){
     const response = await fetch("https://katiel.site/json/posts", {
     method: "POST",
