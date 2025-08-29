@@ -37,6 +37,14 @@ let css = "disabled";
 let con = navigator.connection.type;
 console.log(con);
 
+// check if connection object present
+const connection =
+navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+
+// then use the effectiveType property
+// to get the connection type
+console.log(connection.effectiveType);
+
 //Static Collection end
 
 // const entries = window.performance.getEntriesByType("navigation");
