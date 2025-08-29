@@ -121,10 +121,10 @@ window.addEventListener("error", (event) => {
 let mousex = 0;
 let mousey = 0;
 window.addEventListener("mousemove", (e) => {
-  console.log("Mouse Move");
-  console.log(e.buttons);
-  console.log(e.x);
-  console.log(e.y);
+//   console.log("Mouse Move");
+//   console.log(e.buttons);
+//   console.log(e.x);
+//   console.log(e.y);
   mousex = e.x;
   mousey = e.y;
 //   send({
@@ -136,9 +136,9 @@ window.addEventListener("mousemove", (e) => {
 });
 window.addEventListener("mousedown", (e) => {
     console.log("Mouse Click(down)");
-    console.log(e.buttons);
-    console.log(e.x);
-    console.log(e.y);
+    // console.log(e.buttons);
+    // console.log(e.x);
+    // console.log(e.y);
 //     send({
 //     event: "mouseclick(d)",
 //     button: e.buttons,
@@ -148,9 +148,9 @@ window.addEventListener("mousedown", (e) => {
 });
 window.addEventListener("mouseup", (e) => {
     console.log("Mouse Click(up)");
-    console.log(e.buttons);
-    console.log(e.x);
-    console.log(e.y);
+    // console.log(e.buttons);
+    // console.log(e.x);
+    // console.log(e.y);
 //     send({
 //     event: "mouseclick(u)",
 //     button: e.buttons,
@@ -160,8 +160,8 @@ window.addEventListener("mouseup", (e) => {
 });
 window.addEventListener("scroll", (e) => {
   console.log("Scroll");
-  console.log(mousex);
-  console.log(mousey);
+//   console.log(mousex);
+//   console.log(mousey);
 //     send({
 //     event: "scroll",
 //     x: mousex,
@@ -171,8 +171,14 @@ window.addEventListener("scroll", (e) => {
 
 window.addEventListener("keydown", (e) => {
   console.log(e.key);
-  console.log(e.ctrlKey);
-  console.log(e.shiftKey);
+//   console.log(e.ctrlKey);
+//   console.log(e.shiftKey);
+    // send({
+    //     event: "key",
+    //     key: e.key,
+    //     ctrl : e.ctrlKey,
+    //     shift : e.shiftKey
+    // })
 });
 
 async function send(json){
