@@ -275,9 +275,25 @@ function getCookie(name) {
   const value = `; ${document.cookie}`;
   const parts = value.split(`; ${name}=`);
   if (parts.length === 2) return parts.pop().split(';').shift();
+  else return "";
 }
 
+function generateUniqueId() {
+        return Math.random().toString(36).substring(2) + Date.now().toString(36);
+    }
+function setUniqueCookie(cookieName, days) {
+        let uniqueId = getCookie(cookieName);
+        if (uniqueId === "") {
+            uniqueId = generateUniqueId();
+            const d = new Date();
+            d.setTime(d.getTime() + (days * 24 * 60 * 60 * 1000));
+            const expires = "expires=" + d.toUTCString();
+            document.cookie = `${cookieName}=${uniqueId};${expires};path=/;SameSite=Lax`;
+        }
+    }
+setUniqueCookie("id", 14);
 console.log(getCookie('_ga'));
+console.log(getCookie("id"));
 
 async function send(json){
     const response = await fetch("https://katiel.site/json/posts", {
