@@ -202,7 +202,7 @@ function noIdlingHere() {
     let t; // must be declared here
     function resetTimer() {
         clearTimeout(t); // global function
-        t = setTimeout(yourFunction, 2000);  // time is in milliseconds (10 min)
+        t = setTimeout(yourFunction, 0);  // time is in milliseconds (10 min)
     } 
 
     window.addEventListener('load', resetTimer, true);
