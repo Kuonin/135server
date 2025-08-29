@@ -129,8 +129,14 @@ window.addEventListener("mousemove", (e) => {
   mousex = e.x;
   mousey = e.y;
 });
+window.addEventListener("mousedown", (e) => {
+    console.log("Mouse Click(down)");
+    console.log(e.buttons);
+    console.log(e.x);
+    console.log(e.y);
+});
 window.addEventListener("mouseup", (e) => {
-    console.log("Mouse Click");
+    console.log("Mouse Click(up)");
     console.log(e.buttons);
     console.log(e.x);
     console.log(e.y);
