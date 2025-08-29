@@ -108,15 +108,15 @@ document.addEventListener("DOMContentLoaded", (event) => {
 //continuous data collection
 window.addEventListener("error", (event) => {
 //   log.textContent = `${log.textContent}${event.type}: ${event.message}\n`;
-  console.log(event);
+  console.log(event.message);
 });
-window.onerror = (a, b, c, d, e) => {
-  console.log(`message: ${a}`);
-  console.log(`source: ${b}`);
-  console.log(`lineno: ${c}`);
-  console.log(`colno: ${d}`);
-  console.log(`error: ${e}`);
+// window.onerror = (a, b, c, d, e) => {
+//   console.log(`message: ${a}`);
+//   console.log(`source: ${b}`);
+//   console.log(`lineno: ${c}`);
+//   console.log(`colno: ${d}`);
+//   console.log(`error: ${e}`);
 
-  return true;
-};
+//   return true;
+// };
 b
