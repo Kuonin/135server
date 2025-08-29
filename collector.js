@@ -102,6 +102,21 @@ document.addEventListener("DOMContentLoaded", (event) => {
         console.log("Footer does not exist");
     }
   noimage();
+  if(document.referrer){
+    let currentdate = new Date(); 
+        let datetime = "Last Sync: " + currentdate.getDate() + "/"
+                + (currentdate.getMonth()+1)  + "/" 
+                + currentdate.getFullYear() + " @ "  
+                + currentdate.getHours() + ":"  
+                + currentdate.getMinutes() + ":" 
+                + currentdate.getSeconds();
+    console.log(`Page entered ${datetime}`);
+    console.log(document.referrer);
+  }
+  else{
+    console.log("Something else did it");
+  }
+
   //sendData();
 });
 
@@ -253,6 +268,16 @@ document.onvisibilitychange = () => {
         }
   }
 };
+
+
+
+function getCookie(name) {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop().split(';').shift();
+}
+
+console.log(getCookie('_ga'));
 
 async function send(json){
     const response = await fetch("https://katiel.site/json/posts", {
