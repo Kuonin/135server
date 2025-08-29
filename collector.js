@@ -34,7 +34,7 @@ function noimage(){
 
 let css = "disabled";
 
-let con = navigator.connection.effectiveType;
+let con = navigator.connection.type;
 console.log(con);
 
 //Static Collection end
