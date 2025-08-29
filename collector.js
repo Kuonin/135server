@@ -232,6 +232,28 @@ function noIdlingHere() {
 
 noIdlingHere();
 
+window.onvisibilitychange = () => {
+    let currentdate = new Date(); 
+        let datetime = "Last Sync: " + currentdate.getDate() + "/"
+                + (currentdate.getMonth()+1)  + "/" 
+                + currentdate.getFullYear() + " @ "  
+                + currentdate.getHours() + ":"  
+                + currentdate.getMinutes() + ":" 
+                + currentdate.getSeconds();
+  if (window.visibilityState === "hidden") {
+        console.log(`Page left ${datetime}`);
+  }
+  else if (window.visibilityState === "visible"){
+        console.log(`Page entered ${datetime}`);
+        if(document.referrer){
+            console.log(document.referrer);
+        }
+        else{
+            console.log("typed in");
+        }
+  }
+};
+
 async function send(json){
     const response = await fetch("https://katiel.site/json/posts", {
     method: "POST",
