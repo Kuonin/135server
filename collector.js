@@ -199,10 +199,10 @@ function noIdlingHere() {
         {
             console.log(datetime);
             console.log(performance.now());
-
             console.log(performance.now() - prev);
-            prev = performance.now();
+            
         }
+        prev = performance.now();
         
     }
 
