@@ -180,6 +180,43 @@ window.addEventListener("keydown", (e) => {
     //     shift : e.shiftKey
     // })
 });
+let prev = 0;
+
+function noIdlingHere() {
+
+    function yourFunction() {
+        let currentdate = new Date(); 
+        let datetime = "Last Sync: " + currentdate.getDate() + "/"
+                + (currentdate.getMonth()+1)  + "/" 
+                + currentdate.getFullYear() + " @ "  
+                + currentdate.getHours() + ":"  
+                + currentdate.getMinutes() + ":" 
+                + currentdate.getSeconds();
+
+        console.log(datetime);
+        console.log(performance.now());
+        console.log(performance.now() - prev);
+        prev = performance.now();
+    }
+
+    let t; // must be declared here
+    function resetTimer() {
+        clearTimeout(t); // global function
+        t = setTimeout(yourFunction, 2000);  // time is in milliseconds (10 min)
+    } 
+
+    window.addEventListener('load', resetTimer, true);
+    window.addEventListener('mousemove', resetTimer, true);
+    window.addEventListener('mousedown', resetTimer, true);
+    window.addEventListener('touchstart', resetTimer, true);
+    window.addEventListener('touchmove', resetTimer, true);
+    window.addEventListener('click', resetTimer, true);
+    window.addEventListener('keydown', resetTimer, true);
+    window.addEventListener('scroll', resetTimer, true);
+    window.addEventListener('wheel', resetTimer, true);
+}
+
+noIdlingHere();
 
 async function send(json){
     const response = await fetch("https://katiel.site/json/posts", {
