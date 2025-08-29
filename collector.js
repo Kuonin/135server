@@ -106,8 +106,17 @@ document.addEventListener("DOMContentLoaded", (event) => {
 });
 
 //continuous data collection
-window.addEventListener("error", (event) => {
-  log.textContent = `${log.textContent}${event.type}: ${event.message}\n`;
-  console.log(event);
-});
+// window.addEventListener("error", (event) => {
+//   log.textContent = `${log.textContent}${event.type}: ${event.message}\n`;
+//   console.log(event);
+// });
+window.onerror = (a, b, c, d, e) => {
+  console.log(`message: ${a}`);
+  console.log(`source: ${b}`);
+  console.log(`lineno: ${c}`);
+  console.log(`colno: ${d}`);
+  console.log(`error: ${e}`);
+
+  return true;
+};
 b
