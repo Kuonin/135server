@@ -232,7 +232,7 @@ function noIdlingHere() {
 
 noIdlingHere();
 
-window.onvisibilitychange = () => {
+document.onvisibilitychange = () => {
     let currentdate = new Date(); 
         let datetime = "Last Sync: " + currentdate.getDate() + "/"
                 + (currentdate.getMonth()+1)  + "/" 
@@ -240,10 +240,10 @@ window.onvisibilitychange = () => {
                 + currentdate.getHours() + ":"  
                 + currentdate.getMinutes() + ":" 
                 + currentdate.getSeconds();
-  if (window.visibilityState === "hidden") {
+  if (document.visibilityState === "hidden") {
         console.log(`Page left ${datetime}`);
   }
-  else if (window.visibilityState === "visible"){
+  else if (document.visibilityState === "visible"){
         console.log(`Page entered ${datetime}`);
         if(document.referrer){
             console.log(document.referrer);
