@@ -117,35 +117,56 @@ window.addEventListener("error", (event) => {
   });
 
 });
+
 let mousex = 0;
 let mousey = 0;
 window.addEventListener("mousemove", (e) => {
   console.log("Mouse Move");
-//   console.log(e.pageX);
-//   console.log(e.pageY);
   console.log(e.buttons);
   console.log(e.x);
   console.log(e.y);
   mousex = e.x;
   mousey = e.y;
+  send({
+    event: "mousemove",
+    button: e.buttons,
+    x: e.x,
+    y: e.y
+  });
 });
 window.addEventListener("mousedown", (e) => {
     console.log("Mouse Click(down)");
     console.log(e.buttons);
     console.log(e.x);
     console.log(e.y);
+    send({
+    event: "mouseclick(d)",
+    button: e.buttons,
+    x: e.x,
+    y: e.y
+  });
 });
 window.addEventListener("mouseup", (e) => {
     console.log("Mouse Click(up)");
     console.log(e.buttons);
     console.log(e.x);
     console.log(e.y);
+    send({
+    event: "mouseclick(u)",
+    button: e.buttons,
+    x: e.x,
+    y: e.y
+  });
 });
 window.addEventListener("scroll", (e) => {
   console.log("Scroll");
   console.log(mousex);
   console.log(mousey);
-
+    send({
+    event: "scroll",
+    x: mousex,
+    y: mousey
+  });
 });
 
 async function send(json){
