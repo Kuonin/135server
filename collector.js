@@ -109,7 +109,25 @@ document.addEventListener("DOMContentLoaded", (event) => {
 window.addEventListener("error", (event) => {
 //   log.textContent = `${log.textContent}${event.type}: ${event.message}\n`;
   console.log(event.message);
+  send({
+    event: "error",
+    message: event.message,
+    source: event.source,
+    line: event.lineno
+  })
+
 });
+
+async function send(json){
+    const response = await fetch("https://katiel.site/json/posts", {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json",
+    },
+    body: JSON.stringify(json),
+    // …
+    });
+}
 // window.onerror = (a, b, c, d, e) => {
 //   console.log(`message: ${a}`);
 //   console.log(`source: ${b}`);
