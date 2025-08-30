@@ -19,8 +19,8 @@ function setUniqueCookie(cookieName, days) {
             document.cookie = `${cookieName}=${uniqueId};${expires};path=/;SameSite=Lax`;
         }
     }
-setUniqueCookie("id", 14);
-console.log(getCookie("id"));
+setUniqueCookie("sessionId", 14);
+console.log(getCookie("sessionId"));
 
 //  -- ----------------------- Static Data Collection Start
 
@@ -105,7 +105,7 @@ async function sendData(){
             startLoad : startTime,
             endLoad : endTime,
             totalLoadT : loadTime,
-            id : getCookie("id")
+            sessionId : getCookie("sessionId")
             });        
 }
 
@@ -140,7 +140,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
         event: "Page enter",
             time: datetime,
             pageOn: page,
-            id:getCookie("id")
+            sessionId:getCookie("sessionId")
     })
   }
   else{
@@ -179,7 +179,7 @@ window.addEventListener("error", (event) => {
     message: event.message,
     source: event.filename,
     line: event.lineno,
-    id : getCookie("id")
+    sessionId : getCookie("sessionId")
   });
 
 });
@@ -196,7 +196,7 @@ window.addEventListener("mousemove", (e) => {
     button: e.buttons,
     x: e.x,
     y: e.y,
-     id: getCookie("id")
+     sessionId: getCookie("sessionId")
   });
 });
 
@@ -208,7 +208,7 @@ window.addEventListener("mousedown", (e) => {
     button: e.buttons,
     x: e.x,
     y: e.y,
-     id : getCookie("id")
+     sessionId : getCookie("sessionId")
   });
 });
 window.addEventListener("mouseup", (e) => {
@@ -218,7 +218,7 @@ window.addEventListener("mouseup", (e) => {
     button: e.buttons,
     x: e.x,
     y: e.y,
-     id : getCookie("id")
+     sessionId : getCookie("sessionId")
   });
 });
 
@@ -229,7 +229,7 @@ window.addEventListener("scroll", (e) => {
     event: "scroll",
     x: mousex,
     y: mousey,
-     id : getCookie("id")
+     sessionId : getCookie("sessionId")
   });
 });
 
@@ -244,7 +244,7 @@ window.addEventListener("keydown", (e) => {
         alt: e.altKey,
         code: e.code,
         meta: e.metaKey,
-         id : getCookie("id")
+         sessionId : getCookie("sessionId")
     })
 });
 
@@ -272,7 +272,7 @@ function noIdlingHere() {
                 dur : duration,
                 endDate: datetime,
                 endTime: performance.now(),
-                 id : getCookie("id")
+                 sessionId : getCookie("sessionId")
             });            
         }
         prev = performance.now();
@@ -312,7 +312,7 @@ document.onvisibilitychange = () => {
         send({
             event: "Page left",
             time: datetime,
-            id : getCookie("id")
+            sessionId : getCookie("sessionId")
         });
   }
   else if (document.visibilityState === "visible"){
@@ -326,7 +326,7 @@ document.onvisibilitychange = () => {
             event: "Page enter",
             time: datetime,
             pageOn: page,
-            id:getCookie("id")
+            sessionId:getCookie("sessionId")
         });
   }
 };
