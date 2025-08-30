@@ -82,6 +82,7 @@ window.addEventListener("load", function(){
         loadTime = entry.duration;
         startTime = entry.startTime;
         endTime = entry.loadEventEnd;
+        currTime = Date.now(), // can be used with other values to get a timestamp
         timeObj = entry;
     }, 0);
 });
