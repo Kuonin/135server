@@ -86,16 +86,10 @@ window.addEventListener("load", function(){
     }, 0);
 });
 let storedData = []; //used to store data
+localStorage.setItem("storedData", JSON.stringify(storedData));
 // Sending Data collected after page loads (Static Data + Performance Data)
-let sentStatic = true;
 async function sendData(){
-    try{
-        const response = await fetch("https://katiel.site/json/posts", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
+    send({
             userAgent: user,
             userLan: language,
             cookieEnabled: allowCookie,
@@ -112,32 +106,7 @@ async function sendData(){
             endLoad : endTime,
             totalLoadT : loadTime,
             id : getCookie("id")
-            }),
-        // …
-        });
-    } catch(e){ // not able to send data so store locally
-        sentStatic = false;
-        storedData.push(JSON.stringify({
-            userAgent: user,
-            userLan: language,
-            cookieEnabled: allowCookie,
-            screenWidth: sWidth,
-            screenHeight: sHeight,
-            windowWidth: wWidth,
-            windowHeight: wHeight,
-            javascript : js,
-            imageOn: image,
-            cssEnabled: css,
-            networkCon : connection,
-            timingObj : timeObj,
-            startLoad : startTime,
-            endLoad : endTime,
-            totalLoadT : loadTime,
-            id : getCookie("id")
-            }))
-        localStorage.setItem("storedData", JSON.stringify(storedData));
-    }
-        
+            });        
 }
 
 document.addEventListener("DOMContentLoaded", (event) => {
