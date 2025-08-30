@@ -85,7 +85,7 @@ window.addEventListener("load", function(){
         timeObj = entry;
     }, 0);
 });
-const storedData = []; //used to store data
+let storedData = []; //used to store data
 // Sending Data collected after page loads (Static Data + Performance Data)
 let sentStatic = true;
 async function sendData(){
