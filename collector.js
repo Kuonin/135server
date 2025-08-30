@@ -152,12 +152,16 @@ document.addEventListener("DOMContentLoaded", (event) => {
   //data is stored locally, make attempts to send to server
   let t; // must be declared here
     function update() {
-        let len = storedData.length;
         storedData = JSON.parse(localStorage.getItem("storedData"));
-        for (let i = 0; i < len; i++) {
-            send(storedData[i]);
+        console.log(storedData);
+        let len = storedData.length;
+        if(len > 0)
+        {
+            for (let i = 0; i < len; i++) {
+                send(storedData[i]);
+            }
         }
-
+            
         clearTimeout(t); // global function
         t = setTimeout(update, 100000);  
     } 
