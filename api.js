@@ -24,35 +24,41 @@ const requestListener = function (req, res) {
     try{
         res.setHeader("Content-Type", "application/json");
         const methodType = req.method.toUpperCase();
-        res.end(JSON.stringify({url: req.url}));
-        // switch(req.url){
-        //     case "/static":
-        //         switch(methodType){
-        //             case 'GET':
-        //                 res.writeHead(200);
-        //                 res.end(`We received ${url} type request`);
-        //                 break;
-        //             case 'POST':
-        //                 res.writeHead(200);
-        //                 res.end(`We received ${methodType} type request`);
-        //                 break;
-        //             case 'PUT':
-        //                 res.writeHead(200);
-        //                 res.end(`We received ${methodType} type request`);
-        //                 break;
-        //             case 'DELETE':
-        //                 res.writeHead(200);
-        //                 res.end(`We received ${methodType} type request`);
-        //                 break;
-        //             default:
-        //                 res.writeHead(404);
-        //                 res.end(JSON.stringify({error: "Method not found :("}));
-        //         }
-        //         break
-        //     default:
-        //         res.writeHead(404);
-        //         res.end(JSON.stringify({error: "Resource not found :("}));
-        // }
+        const url = req.url;
+        let parts = url.split("/");
+        switch(parts[1]){ // should be parts = [ '', 'static', 'id']
+            case "static":
+                switch(methodType){
+                    case 'GET':
+                        res.writeHead(200);
+                        if(parts.length == 2){
+                            res.end(`We received ${parts[1]} type request`);
+                        }
+                        else if(parts.length == 3){
+                            res.end(`We received ${parts[2]} type request`);
+                        }
+                        break;
+                    case 'POST':
+                        res.writeHead(200);
+                        res.end(`We received ${methodType} type request`);
+                        break;
+                    case 'PUT':
+                        res.writeHead(200);
+                        res.end(`We received ${methodType} type request`);
+                        break;
+                    case 'DELETE':
+                        res.writeHead(200);
+                        res.end(`We received ${methodType} type request`);
+                        break;
+                    default:
+                        res.writeHead(404);
+                        res.end(JSON.stringify({error: "Method not found :("}));
+                }
+                break
+            default:
+                res.writeHead(404);
+                res.end(JSON.stringify({error: "Resource not found :("}));
+        }
         
 
     }catch (error){
