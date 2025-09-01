@@ -5,10 +5,19 @@ const port = 5000;
 
 //Test Data for the routes
 
-const stat = JSON.stringify([
-    {sessionid: 1, data: "hello world"},
-    {sessionid: 2, data: "goodbye world"}
-]);
+let data = [
+    {"sessionid": 1, "data": "hello world"},
+    {"sessionid": 2, "data": "goodbye world"}
+];
+
+let findData = (id) => {
+    return data.find((session) => {
+        if(session.sessionid == id)
+            return session;
+    });
+}
+
+let stat = JSON.stringify(data);
 
 
 const requestListener = function (req, res) {
@@ -20,7 +29,7 @@ const requestListener = function (req, res) {
                 switch(methodType){
                     case 'GET':
                         res.writeHead(200);
-                        res.end(`We received ${methodType} type request`);
+                        res.end(`We received ${url} type request`);
                         break;
                     case 'POST':
                         res.writeHead(200);
@@ -61,6 +70,10 @@ const requestListener = function (req, res) {
     // res.writeHead(200);
     // res.end(`{"message": "This is a JSON response"}`);
 };
+
+const getMethodHandler = (url, req, res) => {
+    const id = url.substring(1);
+}
 
 const server = http.createServer(requestListener);
 server.listen(port, host, () => {
