@@ -3,7 +3,7 @@ const conString = "mongodb+srv://kyleong_db_user:PKldRtHu66E76w1H@cluster0.agfod
 
 async function main() {
 	// we'll add code here soon
-    const MongoClient = require('mongodb');
+    const {MongoClient} = require('mongodb');
     const client = new MongoClient(conString);
 
     try {
