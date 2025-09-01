@@ -1,28 +1,55 @@
 
 const conString = "mongodb+srv://kyleong_db_user:PKldRtHu66E76w1H@cluster0.agfodrd.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 
-const express = require('express');
-const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
+async function main() {
+	// we'll add code here soon
+    const MongoClient = require('mongodb');
+    const client = new MongoClient(conString);
 
-const app = express();
-const port = 5000;
+    try {
+        // Connect to the MongoDB cluster
+        await client.connect();
+ 
+        // Make the appropriate DB calls
+        await  listDatabases(client);
+ 
+    } catch (e) {
+        console.error(e);
+    } finally {
+        await client.close();
+    }
+};
+async function listDatabases(client){
+    databasesList = await client.db().admin().listDatabases();
+ 
+    console.log("Databases:");
+    databasesList.databases.forEach(db => console.log(` - ${db.name}`));
+};
+main().catch(console.error);
 
-const userRoutes = require('./routes/user');
-app.use('/users', userRoutes);
 
-// Middleware
-app.use(bodyParser.json());
+// const express = require('express');
+// const mongoose = require('mongoose');
+// const bodyParser = require('body-parser');
 
-// MongoDB connection
-mongoose.connect(conString, { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(() => console.log('MongoDB connected...'))
-    .catch(err => console.log(err));
+// const app = express();
+// const port = 5000;
 
-// Start the server
-app.listen(port, () => {
-    console.log(`Server running on port ${port}`);
-});
+// const userRoutes = require('./routes/user');
+// app.use('/users', userRoutes);
+
+// // Middleware
+// app.use(bodyParser.json());
+
+// // MongoDB connection
+// mongoose.connect(conString, { useNewUrlParser: true, useUnifiedTopology: true })
+//     .then(() => console.log('MongoDB connected...'))
+//     .catch(err => console.log(err));
+
+// // Start the server
+// app.listen(port, () => {
+//     console.log(`Server running on port ${port}`);
+// });
 
 
 
