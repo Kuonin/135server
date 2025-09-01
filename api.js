@@ -30,12 +30,16 @@ const requestListener = function (req, res) {
             case "static":
                 switch(methodType){
                     case 'GET':
-                        res.writeHead(200);
-                        if(parts.length == 2){
-                            res.end(`We received ${parts[1]} type request`);
+                        if(parts.length == 2){ //send all the data
+                            res.writeHead(200);
+                            res.end(stat);
                         }
                         else if(parts.length == 3){
-                            res.end(`We received ${parts[2]} type request`);
+                            getMethodHandler(parts[2], req, res);
+                        }
+                        else{
+                            res.writeHead(404);
+                            res.end(JSON.stringify({error: "Url not found :("}));
                         }
                         break;
                     case 'POST':
@@ -78,8 +82,14 @@ const requestListener = function (req, res) {
     // res.end(`{"message": "This is a JSON response"}`);
 };
 
-const getMethodHandler = (url, req, res) => {
-    const id = url.substring(1);
+const getMethodHandler = (id, req, res) => {
+    let session = findData(id);
+    if(!session){
+        res.writeHead(400);
+        res.end(`The session with id ${id} is not found.`);
+    }
+    res.writeHead(200);
+    res.end(JSON.stringify(session));
 }
 
 const server = http.createServer(requestListener);
