@@ -24,7 +24,7 @@ const requestListener = function (req, res) {
     try{
         res.setHeader("Content-Type", "application/json");
         const methodType = req.method.toUpperCase();
-        res.end(JSON.stringify({url: req.url}))
+        res.end(JSON.stringify({url: req.url}));
         // switch(req.url){
         //     case "/static":
         //         switch(methodType){
