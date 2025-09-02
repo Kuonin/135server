@@ -16,7 +16,7 @@
   <h1>Data Base Table</h1>
 
   <script>
-    const grid = document.querySelector("zing-grid");
+    const grid = document.querySelector("#example-grid");
     let data = [{"default": "none"}];
 
     fetch("https://katiel.site/api/static")
@@ -36,7 +36,7 @@
         .catch(function(error){
             console.log(error);
         });
-
+    console.log(data);
     grid.setAttribute("data", JSON.stringify(data));
   </script>
   
