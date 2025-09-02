@@ -10,7 +10,7 @@
  
 <body>
   <!--Grid Component Placement[2]-->
-  <h1>Data Base Visuals</h1>
+  <h1>Data Base Table</h1>
   
   <zing-grid id="example-grid" data="[]"
   >
@@ -22,11 +22,12 @@
 
     fetch("https://katiel.site/api/static")
         .then((response) =>{
-            return response.json();
+            console.log(response)
+            return response.text();
         })
         .then((responses) => {
-            data = responses;
-            console.log(data);
+            //data = responses;
+            console.log(responses);
         })
         .catch(function(error){
             console.log(error);
