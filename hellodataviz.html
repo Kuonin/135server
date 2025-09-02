@@ -5,9 +5,7 @@
   <meta charset="utf-8">
   <title>DataViz</title>
   
-   <script type="module">
-        import './zinggrid.min.js';
-    </script>
+   <script nonce="undefined" src="https://cdn.zingchart.com/zingchart.min.js"></script>
 </head>
  
 <body>
@@ -34,12 +32,12 @@
                     values: [22,23,24,25,26]
                 }]
             }
-            zingchart.render({
-                id: '3barChart',
-                data: myConfig,
-                height: '100%',
-                width: '100%'
-            });
+    zingchart.render({
+        id: '3barChart',
+        data: myConfig,
+        height: '100%',
+        width: '100%'
+    });
 
     // fetch("https://katiel.site/api/static")
     //     .then((response) =>{
