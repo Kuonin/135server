@@ -188,8 +188,7 @@ main().catch(console.error);
 
 //------------------------------------Part 0 code + part 1
 
-const {MongoClient} = require('mongodb');
-const client = new MongoClient(conString);
+
 
 const http = require("http");
 const host = 'localhost';
@@ -214,6 +213,9 @@ let findData = (id) => {
 let stat = JSON.stringify(data);
 
 async function main(data) {
+
+    const {MongoClient} = require('mongodb');
+    const client = new MongoClient(conString);
 
     try {
         // Connect to the MongoDB cluster
