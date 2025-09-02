@@ -297,8 +297,11 @@ const getMethodHandler = (id, req, res) => {
 async function po(res, body){
   try {
     let reqBody = body;
-    res.writeHead(200);
-    res.end(reqBody);
+    // res.writeHead(200);
+    // res.end(reqBody);
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    res.write(JSON.stringify(reqBody));
+    res.end();
     }catch(error){
         console.log(error.message);
     }
