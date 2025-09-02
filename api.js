@@ -241,7 +241,7 @@ const requestListener = function (req, res) {
                         break;
                     case 'POST':
                         res.writeHead(200);
-                        postHandler(client, req.body)
+                        postHandler(client, req.body);
                         res.end(`We received ${methodType} type request`);
                         break;
                     case 'PUT':
@@ -270,9 +270,15 @@ const requestListener = function (req, res) {
     }
 };
 
-const postHandler = (client, data) => {
-    let result = client.db(database).collection("testing").insertOne(data);
+async function postHandler(client, data){
+    const result = await client.db(database).collection("testing").insertOne(data);
+    console.log(`New listing created with the following id: ${result.insertedId}`);
 }
+
+// const postHandler = (client, data) => {
+//     const result = client.db(database).collection("testing").insertOne(data);
+//     console.log(`New listing created with the following id: ${result.insertedId}`);
+// }
 
 const getMethodHandler = (id, req, res) => {
     let session = findData(id);
