@@ -409,9 +409,9 @@ const putMethodHandler = (id, req, res) => {
     body = JSON.parse(body);
   });
   console.log(body);
-  updateSession(id, body)
+  updateSession(id, body);
   res.writeHead(200);
-  res.end(`The Employee object with id is ${reqBody._id} replaced.`);
+  res.end(`The Employee object with id is ${id} replaced.`);
 }
 async function updateSession(id, data) {
     try{
