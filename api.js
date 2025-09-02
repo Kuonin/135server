@@ -220,7 +220,8 @@ async function main(data) {
     try {
         // Connect to the MongoDB cluster
         await client.connect();
-        postHandler(client, data);
+        const result = await client.db(database).collection("testing").insertOne(data);
+        console.log(`New listing created with the following id: ${result.insertedId}`);
  
     } catch (e) {
         console.error(e);
