@@ -300,7 +300,7 @@ async function po(res, body){
     res.writeHead(200);
     res.end(reqBody);
     }catch(error){
-        console.log("Post error");
+        console.log(error.message);
     }
 }
 const getRequestBodyAndGenerateResponse = (req, res, callback) => {
