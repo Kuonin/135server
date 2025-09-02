@@ -251,8 +251,8 @@ const requestListener = function (req, res) {
                         break;
                     case 'POST':
                         res.writeHead(200);
-                        main(req.body);
-                        res.end(`We received ${req.body}`);
+                        //main(req.body);
+                        res.end(`We received ${getRequestBody(req)}`);
                         break;
                     case 'PUT':
                         res.writeHead(200);
@@ -291,6 +291,16 @@ const getMethodHandler = (id, req, res) => {
     }
     res.writeHead(200);
     res.end(JSON.stringify(session));
+}
+
+const getRequestBody = (req) => {
+  let body = '';
+  req.on('data', chunk => {
+    body += chunk.toString();
+  });
+  req.on('end', () => {
+    return body;
+  });
 }
 
 const server = http.createServer(requestListener);
