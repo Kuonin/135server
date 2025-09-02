@@ -252,7 +252,10 @@ const requestListener = function (req, res) {
                     case 'POST':
                         res.writeHead(200);
                         //main(req.body);
-                        res.end(getRequestBody(req));
+                        body = getRequestBody(req);
+                        console.log("jere");
+                        console.log(body);
+                        res.end(body);
                         break;
                     case 'PUT':
                         res.writeHead(200);
