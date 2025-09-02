@@ -287,28 +287,49 @@ const requestListener = function (req, res) {
     }
 };
 
-async function postHandler(data){
-    await client.connect();
-    const result = await client.db(database).collection("testing").insertOne(data);
-    console.log(`New listing created with the following id: ${result.insertedId}`);
-    await client.disconnect();
-}
+//----Get methods
 
 const getMethodHandler = (id, req, res) => {
-    let session = findData(id);
-    if(!session){
-        res.writeHead(400);
-        res.end(`The session with id ${id} is not found.`);
+    getHandler(id).then(session => {
+        if(!session){
+            res.writeHead(400);
+            res.end(`The session with id ${id} is not found.`);
+        }
+        res.writeHead(200);
+        res.end(JSON.stringify(session));
+    });
+   // let session = findData(id); 
+}
+async function getHandler(id) {
+    try{
+        await client.connect();
+        const result = await client.db(database).collection("testing").findOne({ session: id });
+        return result;
+    }catch(e){
+        console.error(e);
+    }finally{
+        await client.close();
     }
-    res.writeHead(200);
-    res.end(JSON.stringify(session));
+}
+
+
+//---Post methods
+
+async function postHandler(data){
+    try{
+        await client.connect();
+        const result = await client.db(database).collection("testing").insertOne(data);
+        console.log(`New listing created with the following id: ${result.insertedId}`);
+    }catch(e){
+        console.error(e);
+    }finally{
+        await client.close();
+    }
 }
 async function po(res, body){
   try {
     let reqBody = body;
     postHandler(reqBody);
-    // res.writeHead(200);
-    // res.end(reqBody);
     res.writeHead(200, { 'Content-Type': 'application/json' });
     res.write(JSON.stringify(reqBody));
     res.end();
@@ -325,6 +346,12 @@ const getRequestBodyAndGenerateResponse = (req, res, callback) => {
     callback(res, JSON.parse(body));
   });
 }
+
+
+
+
+
+
 
 const server = http.createServer(requestListener);
 server.listen(port, host, () => {
