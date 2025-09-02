@@ -373,7 +373,7 @@ const getRequestBodyAndGenerateResponse = (req, res, callback) => {
 //---- DELETE
 
 const deleteMethodHandler = (id, req, res) => {
-  const response = deleteEmployee(id);
+  const response = deleteSession(id);
   res.writeHead(200);
   res.end(`The employee with id ${id} is deleted.`);
 }
