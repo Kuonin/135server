@@ -250,12 +250,10 @@ const requestListener = function (req, res) {
                         }
                         break;
                     case 'POST':
-                        res.writeHead(200);
+                        // res.writeHead(200);
                         //main(req.body);
-                        body = getRequestBody(req);
                         console.log("jere");
-                        console.log(body);
-                        res.end(body);
+                        getRequestBodyAndGenerateResponse(req, res,po);
                         break;
                     case 'PUT':
                         res.writeHead(200);
@@ -296,18 +294,23 @@ const getMethodHandler = (id, req, res) => {
     res.writeHead(200);
     res.end(JSON.stringify(session));
 }
-
-function getRequestBody (req){
+async function po(res, body){
+  try {
+    let reqBody = body;
+    res.writeHead(200);
+    res.end(reqBody);
+    }catch(error){
+        console.log("Post error");
+    }
+}
+const getRequestBodyAndGenerateResponse = (req, res, callback) => {
   let body = '';
   req.on('data', chunk => {
     body += chunk.toString();
   });
   req.on('end', () => {
-    console.log(body);
-    return body;
+    callback(res, JSON.parse(body));
   });
-  console.log(body);
-  return body;
 }
 
 const server = http.createServer(requestListener);
