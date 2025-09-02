@@ -248,8 +248,7 @@ const requestListener = function (req, res) {
                 switch(methodType){
                     case 'GET':
                         if(parts.length == 2){ //send all the data
-                            res.writeHead(200);
-                            res.end(stat);
+                            getMethodHandler(null, req, res);
                         }
                         else if(parts.length == 3){
                             getMethodHandler(parts[2], req, res);
@@ -290,7 +289,7 @@ const requestListener = function (req, res) {
 //----Get methods
 
 const getMethodHandler = (id, req, res) => {
-    getHandler(id).then(session => {
+    getHandler(id).then(session => { //session must be a string
         if(!session){
             res.writeHead(400);
             res.end(`The session with id ${id} is not found.`);
@@ -305,9 +304,13 @@ const getMethodHandler = (id, req, res) => {
 async function getHandler(id) {
     try{
         await client.connect();
-        console.log(id);
-        const result = await client.db(database).collection("testing").findOne({ session: id });
-        console.log(result);
+        if(id != null){
+            const result = await client.db(database).collection("testing").findOne({ session: id });
+        }
+        else{
+            const result = await client.db(database).collection("testing").find();
+            console.log(result)
+        }
         return result;
     }catch(e){
         console.error(e);
