@@ -252,7 +252,7 @@ const requestListener = function (req, res) {
                     case 'POST':
                         res.writeHead(200);
                         //main(req.body);
-                        res.end(`We receive ${getRequestBody(req)}`);
+                        res.end(getRequestBody(req));
                         break;
                     case 'PUT':
                         res.writeHead(200);
@@ -273,8 +273,9 @@ const requestListener = function (req, res) {
         }        
 
     }catch (error){
-        res.writeHead(400);
-        res.end(error.message);
+        //res.writeHead(400);
+        //res.end(error.message);
+        console.log(error.message);
     }
 };
 
