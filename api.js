@@ -12,16 +12,25 @@ async function main() {
  
         // Make the appropriate DB calls
         await  listDatabases(client);
+
+        await updateListingByName(client, "Infinite Views", { bedrooms: 6, beds: 8 });
+
+        await upsertListingByName(client, "Cozy Cottage", { name: "Cozy Cottage", bedrooms: 2, bathrooms: 1 });
+
+        await upsertListingByName(client, "Cozy Cottage", { beds: 2 });
+
+        await updateAllListingsToHavePropertyType(client);
+
         // Find the listing named "Infinite Views" that we created in create.js
-        await findOneListingByName(client, "Infinite Views");
+        // await findOneListingByName(client, "Infinite Views");
 
         // Find up to 5 listings with at least 4 bedrooms and at least 2 bathrooms
         // If you recently ran create.js, a listing named Beautiful Beach House should be included in the results 
-        await findListingsWithMinimumBedroomsBathroomsAndMostRecentReviews(client, {
-            minimumNumberOfBedrooms: 4,
-            minimumNumberOfBathrooms: 2,
-            maximumNumberOfResults: 5
-        });
+        // await findListingsWithMinimumBedroomsBathroomsAndMostRecentReviews(client, {
+        //     minimumNumberOfBedrooms: 4,
+        //     minimumNumberOfBathrooms: 2,
+        //     maximumNumberOfResults: 5
+        // });
     //     await createListing(client,
     //     {
     //         name: "Lovely Loft",
@@ -125,6 +134,38 @@ async function findListingsWithMinimumBedroomsBathroomsAndMostRecentReviews(clie
         console.log(`No listings found with at least ${minimumNumberOfBedrooms} bedrooms and ${minimumNumberOfBathrooms} bathrooms`);
     }
 }
+
+async function updateListingByName(client, nameOfListing, updatedListing) {
+    const result = await client.db("sample_airbnb").collection("listingsAndReviews")
+                        .updateOne({ name: nameOfListing }, { $set: updatedListing });
+
+    console.log(`${result.matchedCount} document(s) matched the query criteria.`);
+    console.log(`${result.modifiedCount} document(s) was/were updated.`);
+}
+
+async function upsertListingByName(client, nameOfListing, updatedListing) {
+    const result = await client.db("sample_airbnb").collection("listingsAndReviews")
+                        .updateOne({ name: nameOfListing }, 
+                                   { $set: updatedListing }, 
+                                   { upsert: true });
+    console.log(`${result.matchedCount} document(s) matched the query criteria.`);
+
+    if (result.upsertedCount > 0) {
+        console.log(`One document was inserted with the id ${result.upsertedId._id}`);
+    } else {
+        console.log(`${result.modifiedCount} document(s) was/were updated.`);
+    }
+}
+
+async function updateAllListingsToHavePropertyType(client) {
+    const result = await client.db("sample_airbnb").collection("listingsAndReviews")
+                        .updateMany({ property_type: { $exists: false } }, 
+                                    { $set: { property_type: "Unknown" } });
+    console.log(`${result.matchedCount} document(s) matched the query criteria.`);
+    console.log(`${result.modifiedCount} document(s) was/were updated.`);
+}
+
+
 main().catch(console.error);
 
 
