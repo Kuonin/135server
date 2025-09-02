@@ -408,6 +408,7 @@ const putMethodHandler = (id, req, res) => {
   req.on('end', () => {
     body = JSON.parse(body);
   });
+  console.log(body);
   updateSession(id, body)
   res.writeHead(200);
   res.end(`The Employee object with id is ${reqBody._id} replaced.`);
