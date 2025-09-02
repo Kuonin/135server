@@ -266,8 +266,15 @@ const requestListener = function (req, res) {
                         res.end(`We received ${methodType} type request`);
                         break;
                     case 'DELETE':
-                        res.writeHead(200);
-                        res.end(`We received ${methodType} type request`);
+                        // res.writeHead(200);
+                        // res.end(`We received ${methodType} type request`);
+                        if(parts.length == 3){
+                            deleteMethodHandler(parts[2],req, res);
+                        }
+                        else{
+                            res.writeHead(404);
+                            res.end("No id was given or in incorrect format");
+                        }
                         break;
                     default:
                         res.writeHead(404);
@@ -362,6 +369,27 @@ const getRequestBodyAndGenerateResponse = (req, res, callback) => {
   req.on('end', () => {
     callback(res, JSON.parse(body));
   });
+}
+//---- DELETE
+
+const deleteMethodHandler = (id, req, res) => {
+  const response = deleteEmployee(id);
+  res.writeHead(200);
+  res.end(`The employee with id ${id} is deleted.`);
+}
+
+async function deleteSession(id) {
+    try{
+        await client.connect();
+         const result = await client.db(database).collection("testing")
+            .deleteOne({ session: id });
+        console.log(`${result.deletedCount} document(s) was/were deleted.`);
+    }catch(e){
+        console.error(e);
+    }finally{
+        await client.close();
+    }
+   
 }
 
 
