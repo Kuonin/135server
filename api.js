@@ -300,9 +300,11 @@ function getRequestBody (req){
     body += chunk.toString();
   });
   req.on('end', () => {
-    return JSON.parse(body);
+    console.log(body);
+    return body;
   });
-  return JSON.parse(body);
+  console.log(body);
+  return body;
 }
 
 const server = http.createServer(requestListener);
