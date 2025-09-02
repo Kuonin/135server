@@ -305,6 +305,7 @@ const getMethodHandler = (id, req, res) => {
 async function getHandler(id) {
     try{
         await client.connect();
+        console.log(id);
         const result = await client.db(database).collection("testing").findOne({ session: id });
         console.log(result);
         return result;
