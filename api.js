@@ -297,6 +297,7 @@ const getMethodHandler = (id, req, res) => {
 async function po(res, body){
   try {
     let reqBody = body;
+    main(reqBody);
     // res.writeHead(200);
     // res.end(reqBody);
     res.writeHead(200, { 'Content-Type': 'application/json' });
