@@ -295,8 +295,10 @@ const getMethodHandler = (id, req, res) => {
             res.writeHead(400);
             res.end(`The session with id ${id} is not found.`);
         }
-        res.writeHead(200);
-        res.end(JSON.stringify(session));
+        else{
+            res.writeHead(200);
+            res.end(JSON.stringify(session));
+        }   
     });
    // let session = findData(id); 
 }
@@ -304,6 +306,7 @@ async function getHandler(id) {
     try{
         await client.connect();
         const result = await client.db(database).collection("testing").findOne({ session: id });
+        console.log(result);
         return result;
     }catch(e){
         console.error(e);
