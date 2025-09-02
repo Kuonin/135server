@@ -5,7 +5,10 @@
   <meta charset="utf-8">
   <title>ZingGrid: Docs Getting Started</title>
   <!--Script Reference[1]-->
-  <script src="https://cdn.zinggrid.com/zinggrid.min.js"></script>
+  <!-- <script src="https://cdn.zinggrid.com/zinggrid.min.js"></script> -->
+   <script type="module">
+        import 'zinggrid';
+    </script>
 </head>
  
 <body>
@@ -27,9 +30,11 @@
         })
         .then((responses) => {
             //data = responses;
+            let res = JSON.parse('[' + responses.replace(/}{(?=([^"]*"[^"]*")*[^"]*$)/g, '},{') + ']');
             console.log("start")
             console.log(responses);
             console.log("here");
+            console.log(res);
         })
         .catch(function(error){
             console.log(error);
