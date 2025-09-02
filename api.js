@@ -322,7 +322,7 @@ async function getHandler(id) {
             const result = await client.db(database).collection("testing").find();
             const results = await result.toArray();
             console.log(results)
-            return result;
+            return results;
         }
     }catch(e){
         console.error(e);
