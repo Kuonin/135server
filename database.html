@@ -17,7 +17,7 @@
 
   <script>
     const grid = document.querySelector("zing-grid");
-    let data = [];
+    let data = [{"default": "none"}];
 
     fetch("https://katiel.site/api/static")
         .then((response) =>{
@@ -37,7 +37,7 @@
             console.log(error);
         });
 
-    grid.setAttribute("data", data);
+    grid.setAttribute("data", JSON.stringify(data));
   </script>
   
   <zing-grid id="example-grid" data="[]"
