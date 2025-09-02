@@ -213,13 +213,23 @@ let findData = (id) => {
 
 let stat = JSON.stringify(data);
 
+async function main(data) {
+
+    try {
+        // Connect to the MongoDB cluster
+        await client.connect();
+        postHandler(client, data);
+ 
+    } catch (e) {
+        console.error(e);
+    } finally {
+        await client.close();
+    }
+};
 
 const requestListener = function (req, res) {
     try{
         res.setHeader("Content-Type", "application/json");
-
-        client.connect();
-
         const methodType = req.method.toUpperCase();
         const url = req.url;
         let parts = url.split("/");
@@ -241,8 +251,8 @@ const requestListener = function (req, res) {
                         break;
                     case 'POST':
                         res.writeHead(200);
-                        postHandler(client, req.body);
-                        res.end(`We received ${methodType} type request`);
+                        main(req.body);
+                        res.end(`We received ${req.body}`);
                         break;
                     case 'PUT':
                         res.writeHead(200);
@@ -260,9 +270,7 @@ const requestListener = function (req, res) {
             default:
                 res.writeHead(404);
                 res.end(JSON.stringify({error: "Resource not found :("}));
-        }
-        client.close();
-        
+        }        
 
     }catch (error){
         res.writeHead(400);
@@ -274,11 +282,6 @@ async function postHandler(client, data){
     const result = await client.db(database).collection("testing").insertOne(data);
     console.log(`New listing created with the following id: ${result.insertedId}`);
 }
-
-// const postHandler = (client, data) => {
-//     const result = client.db(database).collection("testing").insertOne(data);
-//     console.log(`New listing created with the following id: ${result.insertedId}`);
-// }
 
 const getMethodHandler = (id, req, res) => {
     let session = findData(id);
