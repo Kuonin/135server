@@ -306,12 +306,13 @@ async function getHandler(id) {
         await client.connect();
         if(id != null){
             const result = await client.db(database).collection("testing").findOne({ session: id });
+            return result;
         }
         else{
             const result = await client.db(database).collection("testing").find();
             console.log(result)
+            return result;
         }
-        return result;
     }catch(e){
         console.error(e);
     }finally{
