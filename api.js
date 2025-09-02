@@ -262,8 +262,15 @@ const requestListener = function (req, res) {
                         getRequestBodyAndGenerateResponse(req, res,po);
                         break;
                     case 'PUT':
-                        res.writeHead(200);
-                        res.end(`We received ${methodType} type request`);
+                        // res.writeHead(200);
+                        // res.end(`We received ${methodType} type request`);
+                        if(parts.length == 3){
+                            putMethodHandler(parts[2],req, res);
+                        }
+                        else{
+                            res.writeHead(404);
+                            res.end("No id was given or in incorrect format");
+                        }
                         break;
                     case 'DELETE':
                         // res.writeHead(200);
@@ -392,6 +399,33 @@ async function deleteSession(id) {
    
 }
 
+//---PUT
+const putMethodHandler = (id, req, res) => {
+  let body = '';
+  req.on('data', chunk => {
+    body += chunk.toString();
+  });
+  req.on('end', () => {
+    body = JSON.parse(body);
+  });
+  updateSession(id, body)
+  res.writeHead(200);
+  res.end(`The Employee object with id is ${reqBody._id} replaced.`);
+}
+async function updateSession(id, data) {
+    try{
+        await client.connect();
+        const result = await client.db(database).collection("testing")
+                        .updateOne({ session: id }, { $set: data });
+
+        console.log(`${result.matchedCount} document(s) matched the query criteria.`);
+        console.log(`${result.modifiedCount} document(s) was/were updated.`);
+        }catch(e){
+        console.error(e);
+    }finally{
+        await client.close();
+    }
+}
 
 
 
