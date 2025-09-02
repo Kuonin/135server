@@ -309,7 +309,6 @@ const getMethodHandler = (id, req, res) => {
             
         }   
     });
-   // let session = findData(id); 
 }
 async function getHandler(id) {
     try{
@@ -321,7 +320,6 @@ async function getHandler(id) {
         else{
             const result = await client.db(database).collection("testing").find();
             const results = await result.toArray();
-            console.log(results)
             return results;
         }
     }catch(e){
