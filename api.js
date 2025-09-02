@@ -13,13 +13,17 @@ async function main() {
         // Make the appropriate DB calls
         await  listDatabases(client);
 
-        await updateListingByName(client, "Infinite Views", { bedrooms: 6, beds: 8 });
+        await deleteListingByName(client, "Cozy Cottage");
 
-        await upsertListingByName(client, "Cozy Cottage", { name: "Cozy Cottage", bedrooms: 2, bathrooms: 1 });
+        await deleteListingsScrapedBeforeDate(client, new Date("2019-02-15"));
 
-        await upsertListingByName(client, "Cozy Cottage", { beds: 2 });
+        // await updateListingByName(client, "Infinite Views", { bedrooms: 6, beds: 8 });
 
-        await updateAllListingsToHavePropertyType(client);
+        // await upsertListingByName(client, "Cozy Cottage", { name: "Cozy Cottage", bedrooms: 2, bathrooms: 1 });
+
+        // await upsertListingByName(client, "Cozy Cottage", { beds: 2 });
+
+        // await updateAllListingsToHavePropertyType(client);
 
         // Find the listing named "Infinite Views" that we created in create.js
         // await findOneListingByName(client, "Infinite Views");
@@ -164,6 +168,19 @@ async function updateAllListingsToHavePropertyType(client) {
     console.log(`${result.matchedCount} document(s) matched the query criteria.`);
     console.log(`${result.modifiedCount} document(s) was/were updated.`);
 }
+
+async function deleteListingByName(client, nameOfListing) {
+    const result = await client.db("sample_airbnb").collection("listingsAndReviews")
+            .deleteOne({ name: nameOfListing });
+    console.log(`${result.deletedCount} document(s) was/were deleted.`);
+}
+
+async function deleteListingsScrapedBeforeDate(client, date) {
+    const result = await client.db("sample_airbnb").collection("listingsAndReviews")
+        .deleteMany({ "last_scraped": { $lt: date } });
+    console.log(`${result.deletedCount} document(s) was/were deleted.`);
+}
+
 
 
 main().catch(console.error);
