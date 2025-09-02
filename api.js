@@ -188,7 +188,8 @@ main().catch(console.error);
 
 //------------------------------------Part 0 code + part 1
 
-
+const {MongoClient} = require('mongodb');
+const client = new MongoClient(conString);
 
 const http = require("http");
 const host = 'localhost';
@@ -212,27 +213,33 @@ let findData = (id) => {
 
 let stat = JSON.stringify(data);
 
-async function main(data) {
+// async function main(data, method) {
 
-    const {MongoClient} = require('mongodb');
-    const client = new MongoClient(conString);
+//     const {MongoClient} = require('mongodb');
+//     const client = new MongoClient(conString);
 
-    try {
-        // Connect to the MongoDB cluster
-        await client.connect();
-        const result = await client.db(database).collection("testing").insertOne(data);
-        console.log(`New listing created with the following id: ${result.insertedId}`);
+//     try {
+//         // Connect to the MongoDB cluster
+//         await client.connect();
+//         switch(method){
+//             case "POST":
+//                 const result = await client.db(database).collection("testing").insertOne(data);
+//                 console.log(`New listing created with the following id: ${result.insertedId}`);
+//                 break
+//         }
+        
  
-    } catch (e) {
-        console.error(e);
-    } finally {
-        await client.close();
-    }
-};
+//     } catch (e) {
+//         console.error(e);
+//     } finally {
+//         await client.close();
+//     }
+// };
 
 const requestListener = function (req, res) {
     try{
         res.setHeader("Content-Type", "application/json");
+
         const methodType = req.method.toUpperCase();
         const url = req.url;
         let parts = url.split("/");
@@ -253,9 +260,6 @@ const requestListener = function (req, res) {
                         }
                         break;
                     case 'POST':
-                        // res.writeHead(200);
-                        //main(req.body);
-                        console.log("jere");
                         getRequestBodyAndGenerateResponse(req, res,po);
                         break;
                     case 'PUT':
@@ -283,9 +287,11 @@ const requestListener = function (req, res) {
     }
 };
 
-async function postHandler(client, data){
+async function postHandler(data){
+    await client.connect();
     const result = await client.db(database).collection("testing").insertOne(data);
     console.log(`New listing created with the following id: ${result.insertedId}`);
+    await client.disconnect();
 }
 
 const getMethodHandler = (id, req, res) => {
@@ -300,7 +306,7 @@ const getMethodHandler = (id, req, res) => {
 async function po(res, body){
   try {
     let reqBody = body;
-    main(reqBody);
+    postHandler(reqBody);
     // res.writeHead(200);
     // res.end(reqBody);
     res.writeHead(200, { 'Content-Type': 'application/json' });
