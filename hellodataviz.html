@@ -18,6 +18,8 @@
  
 <body>
   <div id='myChart'></div>
+  <div id="chart"></div>
+  <div id="pie"></div>
   <script>
     ZC.LICENSE = ["569d52cefae586f634c54f86dc99e6a9", "b55b025e438fa8a98e32482b5f768ff5"];
     let chartConfig = {
@@ -33,10 +35,51 @@
         }
       ]
     };
+    let cCon = {
+        type: 'bar',
+        series: [{
+            values: [20, 40, 25, 50, 15, 45, 33, 34]
+            }
+        ]
+    };
+    let pCon = {
+        "type": "pie",
+        "title": {
+            "text": "A Pie Chart"
+        },
+        "series": [{
+            "values": [59]
+            },
+            {
+            "values": [55]
+            },
+            {
+            "values": [30]
+            },
+            {
+            "values": [28]
+            },
+            {
+            "values": [15]
+            }
+        ]
+    };
  
     zingchart.render({
       id: 'myChart',
       data: chartConfig,
+      height: '100%',
+      width: '100%'
+    });
+    zingchart.render({
+      id: 'chart',
+      data: cCon,
+      height: '100%',
+      width: '100%'
+    });
+    zingchart.render({
+      id: 'pie',
+      data: pCon,
       height: '100%',
       width: '100%'
     });
