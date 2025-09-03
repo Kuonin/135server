@@ -26,6 +26,7 @@
     let screenHeights = [];
     let userAgents = [];
     let agents = {};
+    let vals = [];
     fetch("https://katiel.site/api/static")
         .then((response) =>{
             console.log(response)
@@ -50,6 +51,11 @@
             const uniqueUserAgents = new Set(userAgents);
             console.log(uniqueUserAgents.size);
             console.log(agents);
+            for(const a of uniqueUserAgents){
+                vals.push({"values" : [agents[a] / uniqueUserAgents.size * 100],
+                        "text" : a
+                });
+            }
             ZC.LICENSE = ["569d52cefae586f634c54f86dc99e6a9", "b55b025e438fa8a98e32482b5f768ff5"];
             let chartConfig = {
             type: 'line',
@@ -77,24 +83,9 @@
             let pCon = {
                 "type": "pie",
                 "title": {
-                    "text": "A Pie Chart"
+                    "text": "UserAgents"
                 },
-                "series": [{
-                    "values": [59]
-                    },
-                    {
-                    "values": [55]
-                    },
-                    {
-                    "values": [30]
-                    },
-                    {
-                    "values": [28]
-                    },
-                    {
-                    "values": [15]
-                    }
-                ]
+                "series": vals
             };
         
             zingchart.render({
