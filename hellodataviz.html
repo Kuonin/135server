@@ -42,11 +42,13 @@
             for(const obj of res){
                 screenWidths.push(obj.screenWidth);
                 screenHeights.push(obj.screenHeight);
-                userAgents.push(obj.userAgent);
-                if(obj.userAgent in agents)
-                    agents[obj.userAgent] += 1;
+                let ag = obj.userAgent.substring(13);
+                ag = ag.split(";")[0];
+                userAgents.push(ag);
+                if(agt in agents)
+                    agents[ag] += 1;
                 else
-                    agents[obj.userAgent] = 1;
+                    agents[ag] = 1;
             }
             const uniqueUserAgents = new Set(userAgents);
             console.log(uniqueUserAgents.size);
@@ -56,6 +58,7 @@
                         "text" : a
                 });
             }
+            console.log(vals);
             ZC.LICENSE = ["569d52cefae586f634c54f86dc99e6a9", "b55b025e438fa8a98e32482b5f768ff5"];
             let chartConfig = {
             type: 'line',
