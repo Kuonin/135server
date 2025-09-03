@@ -42,10 +42,11 @@
             for(const obj of res){
                 screenWidths.push(obj.screenWidth);
                 screenHeights.push(obj.screenHeight);
-                let ag = obj.userAgent.substring(13);
+                let ag = obj.userAgent;
+                ag = ag.substring(13, )
                 ag = ag.split(";")[0];
                 userAgents.push(ag);
-                if(agt in agents)
+                if(ag in agents)
                     agents[ag] += 1;
                 else
                     agents[ag] = 1;
