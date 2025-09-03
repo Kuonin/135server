@@ -64,9 +64,12 @@
     };
     let cCon = {
         type: 'bar',
-        title: "screen widths and heights",
+        "title": {"text": "screen widths and heights"},
         series: [{
-            values: [20, 40, 25, 50, 15, 45, 33, 34]
+            values: screenWidths
+            },
+            {
+                values: screenHeights
             }
         ]
     };
