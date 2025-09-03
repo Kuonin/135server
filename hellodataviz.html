@@ -56,7 +56,7 @@
             console.log(agents);
             for(const a of uniqueUserAgents){
                 vals.push({"values" : [agents[a] / uniqueUserAgents.size * 100],
-                        "text" : a
+                        "text" : a, detached:true
                 });
             }
             console.log(vals);
