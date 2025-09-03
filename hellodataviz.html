@@ -24,6 +24,8 @@
 
     let screenWidths = [];
     let screenHeights = [];
+    let userAgents = [];
+    let agents = {};
     fetch("https://katiel.site/api/static")
         .then((response) =>{
             console.log(response)
@@ -39,7 +41,15 @@
             for(const obj of res){
                 screenWidths.push(obj.screenWidth);
                 screenHeights.push(obj.screenHeight);
+                userAgents.push(obj.userAgent);
+                if(obj.userAgent in agents)
+                    agents[obj.userAgent] += 1;
+                else
+                    agents[obj.userAgent] = 1;
             }
+            const uniqueUserAgents = new Set(userAgents);
+            console.log(uniqueUserAgents.size);
+            console.log(agents);
             ZC.LICENSE = ["569d52cefae586f634c54f86dc99e6a9", "b55b025e438fa8a98e32482b5f768ff5"];
             let chartConfig = {
             type: 'line',
@@ -58,9 +68,9 @@
                 type: 'bar',
                 "title": {"text": "screen widths and heights"},
                 series: [{
-                    values: screenWidths
+                    values: screenWidths, "text": "Widths"
                     },{
-                        values: screenHeights
+                        values: screenHeights, "test" : "Heights"
                     }
                 ]
             };
