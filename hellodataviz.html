@@ -40,10 +40,6 @@
                 screenWidths.push(obj.screenWidth);
                 screenHeights.push(obj.screenHeight);
             }
-            console.log(screenWidths);
-            console.log(screenHeights);
-            console.log(typeof screenWidths[0]);
-
         })
         .catch(function(error){
             console.log(error);
@@ -66,6 +62,11 @@
     let vlas = [30, 5, 18, 21, 33, 41, 29, 15];
     console.log("Vlas");
     console.log(vlas);
+    console.log(screenWidths);
+    console.log(screenHeights);
+    console.log(typeof screenWidths[0]);
+    console.log(typeof vlas);
+    console.log(typeof screenHeights);
     let cCon = {
         type: 'bar',
         "title": {"text": "screen widths and heights"},
