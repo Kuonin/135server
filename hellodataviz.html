@@ -54,22 +54,13 @@
                 }
             ]
             };
-            let vlas = [30, 5, 18, 21, 33, 41, 29, 15];
-            console.log("Vlas");
-            console.log(vlas);
-            console.log(screenWidths);
-            console.log(screenHeights);
-            console.log(typeof screenWidths[0]);
-            console.log(typeof vlas[0]);
-            console.log(typeof screenHeights[0]);
             let cCon = {
                 type: 'bar',
                 "title": {"text": "screen widths and heights"},
                 series: [{
-                    values: screenHeights//[358,742,932,1180,1280,720,720,915,742,742]
-                    },
-                    {
-                        values: vlas
+                    values: screenWidths
+                    },{
+                        values: screenHeights
                     }
                 ]
             };
