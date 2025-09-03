@@ -21,6 +21,24 @@
   <div id="chart"></div>
   <div id="pie"></div>
   <script>
+
+    fetch("https://katiel.site/api/static")
+        .then((response) =>{
+            console.log(response)
+            return response.text();
+        })
+        .then((responses) => {
+            //data = responses;
+            let res = JSON.parse('[' + responses.replace(/}{(?=([^"]*"[^"]*")*[^"]*$)/g, '},{') + ']');
+            console.log("start")
+            console.log(responses);
+            console.log("here");
+            console.log(res);
+        })
+        .catch(function(error){
+            console.log(error);
+        });
+
     ZC.LICENSE = ["569d52cefae586f634c54f86dc99e6a9", "b55b025e438fa8a98e32482b5f768ff5"];
     let chartConfig = {
       type: 'line',
