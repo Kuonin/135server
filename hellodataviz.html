@@ -24,6 +24,7 @@
 
     let screenWidths = [];
     let screenHeights = [];
+    let screenHyp = [];
     let userAgents = [];
     let agents = {};
     let vals = [];
@@ -42,6 +43,7 @@
             for(const obj of res){
                 screenWidths.push(obj.screenWidth);
                 screenHeights.push(obj.screenHeight);
+                screenHyp.push(Math.sqrt(obj.screenHeight ** 2 + obj.screenWidth ** 2));
                 let ag = obj.userAgent;
                 ag = ag.substring(13, )
                 ag = ag.split(";")[0];
@@ -63,14 +65,15 @@
             ZC.LICENSE = ["569d52cefae586f634c54f86dc99e6a9", "b55b025e438fa8a98e32482b5f768ff5"];
             let chartConfig = {
             type: 'line',
+            "title": "Screen heights vs screen widths vs screen diagonals",
             series: [{
-                values: [20, 40, 25, 50, 15, 45, 33, 34]
+                values: screenWidths
                 },
                 {
-                values: [5, 30, 21, 18, 59, 50, 28, 33]
+                values: screenHeights
                 },
                 {
-                values: [30, 5, 18, 21, 33, 41, 29, 15]
+                values: screenHyp
                 }
             ]
             };
