@@ -129,7 +129,7 @@ async function getHandler(id,database) {
     try{
         await client.connect();
         if(id != null){
-            const result = await client.db(database).collection("testing").findOne({ session: id });
+            const result = await client.db(database).collection("testing").findOne({ sessionId: id });
             return result;
         }
         else{
