@@ -107,7 +107,7 @@ async function sendData(){
             endLoad : endTime,
             totalLoadT : loadTime,
             sessionId : getCookie("sessionId")
-            });        
+            }, "static");        
 }
 
 document.addEventListener("DOMContentLoaded", (event) => {
@@ -137,12 +137,12 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 + currentdate.getSeconds();
     // console.log(`Page entered ${datetime}`);
     // console.log(document.referrer);
-    // send({
-    //     event: "Page enter",
-    //         time: datetime,
-    //         pageOn: page,
-    //         sessionId:getCookie("sessionId")
-    // })
+    send({
+        event: "Page enter",
+            time: datetime,
+            pageOn: page,
+            sessionId:getCookie("sessionId")
+    }, "performance")
   }
   else{
     console.log("Something else did it");
@@ -151,22 +151,22 @@ document.addEventListener("DOMContentLoaded", (event) => {
   sendData(); 
 
   //data is stored locally, make attempts to send to server
-//   let t; // must be declared here
-//     function update() {
-//         storedData = JSON.parse(localStorage.getItem("storedData"));
-//         console.log(storedData);
-//         let len = storedData.length;
-//         if(len > 0)
-//         {
-//             for (let i = 0; i < len; i++) {
-//                 send(storedData[i]);
-//             }
-//         }
+  let t; // must be declared here
+    function update() {
+        storedData = JSON.parse(localStorage.getItem("storedData"));
+        console.log(storedData);
+        let len = storedData.length;
+        if(len > 0)
+        {
+            for (let i = 0; i < len; i++) {
+                send(storedData[i], "active");
+            }
+        }
             
-//         clearTimeout(t); // global function
-//         t = setTimeout(update, 100000);  
-//     } 
-//     update();
+        clearTimeout(t); // global function
+        t = setTimeout(update, 100000);  
+    } 
+    update();
 });
 
 //------------------------- Activity Data Collection Start
@@ -175,13 +175,13 @@ document.addEventListener("DOMContentLoaded", (event) => {
 window.addEventListener("error", (event) => {
   console.log(event);
   console.log(event.filename);
-//   send({
-//     event: "error",
-//     message: event.message,
-//     source: event.filename,
-//     line: event.lineno,
-//     sessionId : getCookie("sessionId")
-//   });
+  send({
+    event: "error",
+    message: event.message,
+    source: event.filename,
+    line: event.lineno,
+    sessionId : getCookie("sessionId")
+  }, "active");
 
 });
 
@@ -192,61 +192,61 @@ let mousey = 0;
 window.addEventListener("mousemove", (e) => {
   mousex = e.x;
   mousey = e.y;
-//   send({ 
-//     event: "mousemove",
-//     button: e.buttons,
-//     x: e.x,
-//     y: e.y,
-//      sessionId: getCookie("sessionId")
-//   });
+  send({ 
+    event: "mousemove",
+    button: e.buttons,
+    x: e.x,
+    y: e.y,
+     sessionId: getCookie("sessionId")
+  }, "active");
 });
 
 //Collecting mouse clicks
 window.addEventListener("mousedown", (e) => {
     // console.log("Mouse Click(down)");
-//     send({ 
-//     event: "mouseclick(d)",
-//     button: e.buttons,
-//     x: e.x,
-//     y: e.y,
-//      sessionId : getCookie("sessionId")
-//   });
+    send({ 
+    event: "mouseclick(d)",
+    button: e.buttons,
+    x: e.x,
+    y: e.y,
+     sessionId : getCookie("sessionId")
+  }, "active");
 });
 window.addEventListener("mouseup", (e) => {
     // console.log("Mouse Click(up)");
-//     send({ 
-//     event: "mouseclick(u)",
-//     button: e.buttons,
-//     x: e.x,
-//     y: e.y,
-//      sessionId : getCookie("sessionId")
-//   });
+    send({ 
+    event: "mouseclick(u)",
+    button: e.buttons,
+    x: e.x,
+    y: e.y,
+     sessionId : getCookie("sessionId")
+  }, "active");
 });
 
 //Collecting Scrolling Activity
 window.addEventListener("scroll", (e) => {
-//   console.log("Scroll");
-//     send({ 
-//     event: "scroll",
-//     x: mousex,
-//     y: mousey,
-//      sessionId : getCookie("sessionId")
-//   });
+  console.log("Scroll");
+    send({ 
+    event: "scroll",
+    x: mousex,
+    y: mousey,
+     sessionId : getCookie("sessionId")
+  }, "active");
 });
 
 // Collecting Key Activity
 window.addEventListener("keydown", (e) => {
 //   console.log(e.key);
-    // send({ 
-    //     event: "key",
-    //     key: e.key,
-    //     ctrl : e.ctrlKey,
-    //     shift : e.shiftKey,
-    //     alt: e.altKey,
-    //     code: e.code,
-    //     meta: e.metaKey,
-    //      sessionId : getCookie("sessionId")
-    // })
+    send({ 
+        event: "key",
+        key: e.key,
+        ctrl : e.ctrlKey,
+        shift : e.shiftKey,
+        alt: e.altKey,
+        code: e.code,
+        meta: e.metaKey,
+         sessionId : getCookie("sessionId")
+    }, "active")
 });
 
 // Determining Idle time
@@ -268,13 +268,13 @@ function noIdlingHere() {
         if(duration >= 2000) // Idle time occurs
         {
             // console.log(duration);
-            // send({
-            //     event: "idle",
-            //     dur : duration,
-            //     endDate: datetime,
-            //     endTime: performance.now(),
-            //      sessionId : getCookie("sessionId")
-            // });            
+            send({
+                event: "idle",
+                dur : duration,
+                endDate: datetime,
+                endTime: performance.now(),
+                 sessionId : getCookie("sessionId")
+            }, "active");            
         }
         prev = performance.now();
         
@@ -310,11 +310,11 @@ document.onvisibilitychange = () => {
                 + currentdate.getSeconds();
   if (document.visibilityState === "hidden") {
         // console.log(`Page left ${datetime}`);
-        // send({
-        //     event: "Page left",
-        //     time: datetime,
-        //     sessionId : getCookie("sessionId")
-        // });
+        send({
+            event: "Page left",
+            time: datetime,
+            sessionId : getCookie("sessionId")
+        }, "active");
   }
   else if (document.visibilityState === "visible"){
         // console.log(`Page entered ${datetime}`);
@@ -323,20 +323,20 @@ document.onvisibilitychange = () => {
             // console.log(document.referrer);
             page = document.referrer;
         }
-        // send({
-        //     event: "Page enter",
-        //     time: datetime,
-        //     pageOn: page,
-        //     sessionId:getCookie("sessionId")
-        // });
+        send({
+            event: "Page enter",
+            time: datetime,
+            pageOn: page,
+            sessionId:getCookie("sessionId")
+        }, "active");
   }
 };
 
 //Function used to send data based on a passed in body
-async function send(json){
+async function send(json, db){
     try{
         // const response = await fetch("https://katiel.site/json/posts", {
-        const response = await fetch("https://katiel.site/api/static", {
+        const response = await fetch(`https://katiel.site/api/${db}`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
