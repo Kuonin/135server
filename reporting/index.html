@@ -38,25 +38,24 @@
             console.log(lan);
             console.log(lanLabels);
             console.log(lanVals);
-            lanLabels = ['en', 'fr'];
-            lanValues = [20, 10];
+            lanLabels = [['en', 10], ['fr', 5]];
             ZC.LICENSE = ["569d52cefae586f634c54f86dc99e6a9", "b55b025e438fa8a98e32482b5f768ff5"];
             let chartConfig = {
             type: 'bar',
             "title": {"text":"User Languages"},
-            "scale-y": {
-                "guide" : {
-                    "visible" : true
-                },
-                "label" : {
-                    "text" : "Number of Users"
-                }
-            },
-            "scaleX" :{
-                "values" : lanLabels
-            },
+            // "scale-y": {
+            //     "guide" : {
+            //         "visible" : true
+            //     },
+            //     "label" : {
+            //         "text" : "Number of Users"
+            //     }
+            // },
+            // "scaleX" :{
+            //     "values" : lanLabels
+            // },
             series:{
-                "values" : lanVals
+                "values" : lanLabels
             } 
             };
             // let cCon = {
