@@ -4,8 +4,114 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Report Dashboard</title>
+    <script nonce="undefined" src="https://cdn.zingchart.com/zingchart.min.js"></script>
 </head>
 <body>
     <h1>Dashboard</h1>
+    <div id='language'></div>
+    <div id="chart"></div>
+    <div id="pie"></div>
+    <script>
+
+    let lan = [];
+    let languages = {};
+    let lanLabels = [];
+    let lanVals = [];
+    fetch("https://katiel.site/api/static")
+        .then((response) =>{
+            return response.text();
+        })
+        .then((responses) => {
+            let res = JSON.parse('[' + responses.replace(/}{(?=([^"]*"[^"]*")*[^"]*$)/g, '},{') + ']');
+            for(const obj of res){
+                let ln = obj.userLan;
+                lan.push(ln);
+                if(ln in languages)
+                    languages[ln] += 1;
+                else
+                    languages[ln] = 1;
+            }
+            for(const key in languages){
+                lanLabels.push(key);
+                lanVals.push(languages[key]);
+            }
+            console.log(lan);
+            ZC.LICENSE = ["569d52cefae586f634c54f86dc99e6a9", "b55b025e438fa8a98e32482b5f768ff5"];
+            let chartConfig = {
+            type: 'bar',
+            "title": {"text":"User Languages"},
+            "scale-y": {
+                "guide" : {
+                    "visible" : true
+                },
+                "label" : {
+                    "text" : "Number of Users"
+                }
+            },
+            "scaleX" :{
+                "values" : lanLabels
+            },
+            series:{
+                "values" : lanVals
+            } 
+            };
+            // let cCon = {
+            //     type: 'bar',
+            //     "title": {"text": "screen widths and heights"},
+            //     series: [{
+            //         values: screenWidths, "text": "Widths"
+            //         },{
+            //             values: screenHeights, "test" : "Heights"
+            //         }
+            //     ]
+            // };
+            // let pCon = {
+            //     "type": "pie",
+            //     "title": {
+            //         "text": "UserAgents"
+            //     },
+            //     "series": vals,
+            //     plot: {
+            //         borderColor: "#2B313B",
+            //         borderWidth: 5,
+            //         // slice: 90,
+            //         valueBox: {
+            //         placement: 'out',
+            //         text: '%t\n%npv%',
+            //         fontFamily: "Open Sans"
+            //         },
+            //         tooltip: {
+            //         fontSize: '18',
+            //         fontFamily: "Open Sans",
+            //         padding: "5 10",
+            //         text: "%npv%"
+            //         }}
+            // };
+        
+            zingchart.render({
+            id: 'languages',
+            data: chartConfig,
+            height: '100%%',
+            width: '100%%'
+            });
+            // zingchart.render({
+            // id: 'chart',
+            // data: cCon,
+            // height: '100%%',
+            // width: '100%%'
+            // });
+            // zingchart.render({
+            // id: 'pie',
+            // data: pCon,
+            // height: '100%%',
+            // width: '100%%'
+            // });
+        })
+        .catch(function(error){
+            console.log(error);
+        });
+
+    
+  </script>
 </body>
 </html>
