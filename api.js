@@ -126,6 +126,7 @@ const getMethodHandler = (id, req, res,database) => {
     });
 }
 async function getHandler(id,database) {
+    const client = new MongoClient(conString);
     try{
         await client.connect();
         if(id != null){
@@ -149,6 +150,7 @@ async function getHandler(id,database) {
 //---Post methods
 
 async function postHandler(data, database){
+    const client = new MongoClient(conString);
     try{
         await client.connect();
         const result = await client.db(database).collection("testing").insertOne(data);
@@ -188,6 +190,7 @@ const deleteMethodHandler = (id, req, res, database) => {
 }
 
 async function deleteSession(id, database) {
+    const client = new MongoClient(conString);
     try{
         await client.connect();
          const result = await client.db(database).collection("testing")
@@ -216,6 +219,7 @@ const putMethodHandler = (id, req, res, database) => {
   res.end(`The Employee object with id is ${id} replaced.`);
 }
 async function updateSession(id, data, database) {
+    const client = new MongoClient(conString);
     try{
         await client.connect();
         const result = await client.db(database).collection("testing")
