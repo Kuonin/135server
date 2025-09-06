@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clicks Report</title>
+    <script nonce="undefined" src="https://cdn.zingchart.com/zingchart.min.js"></script>
+    <script type="module">
+        import './zinggrid.min.js';
+    </script>
+</head>
+<body>
+    <div id="clicks"></div>
+    <div id="grid"></div>
+    <script>
+    let clicks = [];
+    let users = [];
+    fetch("https://reporting.katiel.site/api/active")
+        .then((response) =>{
+            return response.text();
+        })
+        .then((responses) => {
+            console.log(responses);
+            let res = JSON.parse('[' + responses.replace(/}{(?=([^"]*"[^"]*")*[^"]*$)/g, '},{') + ']');
+            for(const obj of res){
+                if('event' in obj){
+                    let event = "event";
+                    let objEvent = obj[event];
+                    console.log(objEvent);
+                    if(objEvent == "mouseclick(u)"){
+                        clicks.push([obj['x'], obj['y']]);
+                        users.push({values : [obj['sessionId'], obj['x'], obj['y']]});
+                    }
+                }
+            }
+            console.log(clicks);
+            console.log(pages);
+            ZC.LICENSE = ["569d52cefae586f634c54f86dc99e6a9", "b55b025e438fa8a98e32482b5f768ff5"];
+            let chartConfig = {
+            type: 'scatter',
+            "title": {"text":"User Mouse Clicks"},
+            series: [
+                {values : clicks}
+            ]
+            };
+            let gridConfig = {
+                type : 'grid', 
+                "title" : {"text" : "Users Clicks"},
+                series: users
+            }
+        
+            zingchart.render({
+            id: 'clicks',
+            data: chartConfig,
+            height: '100%%',
+            width: '100%%'
+            });
+            zingchart.render({
+            id: 'pages',
+            data: gridConfig,
+            height: '100%%',
+            width: '100%%'
+            });
+        })
+        .catch(function(error){
+            console.log(error);
+        });
+    
+  </script>
+</body>
+</html>
