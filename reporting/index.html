@@ -80,7 +80,7 @@
             console.log(responses);
             let res = JSON.parse('[' + responses.replace(/}{(?=([^"]*"[^"]*")*[^"]*$)/g, '},{') + ']');
             for(const obj of res){
-                if('events' in obj){
+                if('event' in obj){
                     let event = "event";
                     let objEvent = obj[event];
                     console.log(objEvent);
