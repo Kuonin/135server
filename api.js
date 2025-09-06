@@ -133,6 +133,7 @@ async function getHandler(id,database) {
             return result;
         }
         else{
+            console.log("here");
             const result = await client.db(database).collection("testing").find();
             const results = await result.toArray();
             return results;
