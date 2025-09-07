@@ -112,6 +112,10 @@
             let gridConfig = {
                 type : 'grid', 
                 "title" : {"text" : "Users Entering and Leaving the Page"},
+                options:{
+                    headerRow: true,
+                    colLabels:['Session Id', 'Page Action', 'Date and Time']
+                },
                 series: pages
             }
         
