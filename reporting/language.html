@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clicks Report</title>
+    <script nonce="undefined" src="https://cdn.zingchart.com/zingchart.min.js"></script>
+    <script type="module">
+        import './zinggrid.min.js';
+    </script>
+</head>
+<body>
+    <h1>Detailed Report about Session Languages</h1>
+    <p>Are there many international users coming to the site and if so, what language do they speak?</p>
+    <div id="language"></div>
+    <div id="grid"></div>
+    <section>
+        <h2>Discussion</h2>
+        <p>
+            
+        </p>
+    </section>
+    <script>
+    let lan = [];
+    let languages = {};
+    let lanLabels = [];
+    let lanVals = [];
+    let users = [];
+    fetch("https://reporting.katiel.site/api/static")
+        .then((response) =>{
+            return response.text();
+        })
+        .then((responses) => {
+            let res = JSON.parse('[' + responses.replace(/}{(?=([^"]*"[^"]*")*[^"]*$)/g, '},{') + ']');
+            for(const obj of res){
+                let ln = obj.userLan;
+                lan.push(ln);
+                if(ln in languages)
+                    languages[ln] += 1;
+                else
+                    languages[ln] = 1;
+                let ag = obj.userAgent;
+                ag = ag.substring(13, )
+                ag = ag.split(";")[0];
+                users.push({
+                    values: [obj['sessionId'], obj['userLan'], obj['cookieEnabled'],ag ]
+                });
+            }
+            for(const key in languages){
+                lanLabels.push(key);
+                lanVals.push(languages[key]);
+                
+            }
+            console.log(lan);
+            console.log(lanLabels);
+            console.log(lanVals);
+            ZC.LICENSE = ["569d52cefae586f634c54f86dc99e6a9", "b55b025e438fa8a98e32482b5f768ff5"];
+            let chartConfig = {
+            type: 'bar',
+            plotarea:{
+                adjustLayout : true
+            },
+            scaleX :{
+                label :{
+                    text : "Browser Languages"
+                },
+                labels : lanLabels
+            },
+            scaleY :{
+                label : {text : "Number of Sessions"}
+            },
+            series: [
+                {values : lanVals}
+            ]
+            };
+            let gridConfig = {
+                type : 'grid', 
+                "title" : {"text" : "Session Languages"},
+                options:{
+                    headerRow: true,
+                    colLabels:['Session Id', 'Session Language', 'Cookies Enabled', 'User Agent']
+                },
+                series: users
+            }
+        
+            zingchart.render({
+            id: 'language',
+            data: chartConfig,
+            height: '100%%',
+            width: '100%%'
+            });
+            zingchart.render({
+            id: 'grid',
+            data: gridConfig,
+            height: '100%%',
+            width: '100%%'
+            });
+        })
+        .catch(function(error){
+            console.log(error);
+        });
+  </script>
+</body>
+</html>
