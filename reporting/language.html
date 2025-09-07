@@ -11,13 +11,19 @@
 </head>
 <body>
     <h1>Detailed Report about Session Languages</h1>
-    <p>Are there many international users coming to the site and if so, what language do they speak?</p>
+    <p>Are there many international users coming to the site and if so, what languages do they speak?</p>
     <div id="language"></div>
     <div id="grid"></div>
     <section>
         <h2>Discussion</h2>
         <p>
-            
+            The data here is currently showing that the most common language used is English, however, it is not 
+            the only language, as seen by the different column values. While none of the other languages, for example japanese,
+            have nearly as many users as english does, they still do exist as users of the site. This demonstrates that the users
+            are not just US citizens, so making choices while only thinking about the rules of English, like setting a page 
+            so that text always reads left to right is bad as there are users who use languages that read right to left, like japanese,
+            and it is important to make design descions that takes into account that people of other languages whose words may be
+            read in a different orientation than english along with having different lengths of words that mean the same things.
         </p>
     </section>
     <script>
@@ -77,6 +83,7 @@
                 type : 'grid', 
                 "title" : {"text" : "Session Languages"},
                 options:{
+                    forceHeight: true,
                     headerRow: true,
                     colLabels:['Session Id', 'Session Language', 'Cookies Enabled', 'User Agent']
                 },
