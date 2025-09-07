@@ -11,10 +11,12 @@
 </head>
 <body>
     <h1>Dashboard</h1>
+    <h2>Range of languages Sessions are occuring in</h2>
     <div id='language'></div>
-    <h2>User Clicks</h2>
-    <a href="./clicks.html">Clicks Report</a>
+    <h2>Coordinates of where Users are clicking on</h2>
+    <a href="./clicks.html">Detailed User Clicks Report</a>
     <div id="clicks"></div>
+    <h2>User Page Access and Exits</h2>
     <div id="pages"></div>
     <script>
 
@@ -46,7 +48,6 @@
             ZC.LICENSE = ["569d52cefae586f634c54f86dc99e6a9", "b55b025e438fa8a98e32482b5f768ff5"];
             let chartConfig = {
             type: 'bar',
-            "title": {"text":"User Languages"},
             plotarea:{
                 adjustLayout : true
             },
@@ -55,6 +56,9 @@
                     text : "Browser Languages"
                 },
                 labels : lanLabels
+            },
+            scaleY :{
+                label : {text : "Number of Sessions"}
             },
             series: [
                 {values : lanVals}
